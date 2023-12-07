@@ -7,6 +7,8 @@ To compile the project use:
 To compile and run the project use:
 `make run`
 
+Alternatively use whatever system your IDE provides.
+
 ## Structure
 
 ### Game
