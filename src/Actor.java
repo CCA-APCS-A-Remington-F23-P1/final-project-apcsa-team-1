@@ -71,7 +71,8 @@ public class Actor {
     }
 
     public Actor scale(double scale) {
-        this.scale = scale;
+        this.width *= scale;
+        this.height *= scale;
         return this;
     }
 
@@ -81,8 +82,8 @@ public class Actor {
     }
 
     public void draw(Graphics frame) {
-        int imageWidth = (int)(scale * width);
-        int imageHeight = (int)(scale * height);
+        int imageWidth = width;
+        int imageHeight = height;
         frame.drawImage(images[animationFrame], x,  y, imageWidth, imageHeight, null);
     }
 

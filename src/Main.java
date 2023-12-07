@@ -16,7 +16,6 @@ public class Main {
         Game game = new Game();
         // add the jpanel to the window
         window.add(game);
-        // pass keyboard inputs to the jpanel
         window.addKeyListener(game);
 
         // don't allow the user to resize the window

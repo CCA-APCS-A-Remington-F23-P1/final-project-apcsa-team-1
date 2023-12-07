@@ -1,13 +1,8 @@
-import java.awt.Font;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Toolkit;
+import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.HashSet;
-
 import static java.awt.event.KeyEvent.*;
 import javax.swing.*;
 
@@ -22,6 +17,15 @@ public class Game extends JPanel implements ActionListener, KeyListener {
     private State state = State.STARTING;
 
     public Game() {
+        KeyboardFocusManager.getCurrentKeyboardFocusManager()
+            .addKeyEventDispatcher(new KeyEventDispatcher() {
+                @Override
+                public boolean dispatchKeyEvent(KeyEvent e) {
+                    System.out.println(e);
+                    return false;
+                }
+            });
+
         // set the game board size
         setPreferredSize(new Dimension(WIDTH, HEIGHT));
         // set the game board background color
@@ -92,9 +96,7 @@ public class Game extends JPanel implements ActionListener, KeyListener {
     }
 
     @Override
-    public void keyTyped(KeyEvent e) {
-
-    }
+    public void keyTyped(KeyEvent e) {}
 
     @Override
     public synchronized void keyPressed(KeyEvent e) {
