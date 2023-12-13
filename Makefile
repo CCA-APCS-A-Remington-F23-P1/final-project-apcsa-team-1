@@ -19,3 +19,10 @@ images:
 
 clean:
 	rm -rf ./*.tar
+
+config:
+	git config --global user.email "project-people@team"
+	git config --global user.name "replit bad"
+
+pull: config
+	git pull
