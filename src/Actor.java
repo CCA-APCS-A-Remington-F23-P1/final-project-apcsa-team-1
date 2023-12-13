@@ -1,26 +1,26 @@
 import javax.imageio.ImageIO;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.IllegalFormatException;
-import java.util.stream.*;
-import java.util.List;
-import java.awt.*;
+import java.util.stream.Stream;
 
-public class Actor {
-    private BufferedImage[] images;
-    private int animationFrame = 0;
-    private int animationRate = 100;
-    private long animationTimer = System.currentTimeMillis();
-
+public class Actor extends JLabel {
     public static final File IMAGES = new File("images");
+    public BufferedImage[] images;
     public int width;
     public int height;
     public int x;
     public int y;
     public double scale = 1.0;
+    public boolean flip = false;
+    private int animationFrame = 0;
+    private int animationRate = 100;
+    private long animationTimer = System.currentTimeMillis();
 
-    public Actor() {}
+    public Actor() {
+    }
 
     /**
      * Takes a path and appends it to the `images` folder, takes all images from the
@@ -39,12 +39,12 @@ public class Actor {
                 .toArray(BufferedImage[]::new);
 
         if (images.length == 0) {
-            throw new IllegalArgumentException("frame directory cannot be empty");
+            size(0, 0);
+            return this;
         }
 
         var first = images[0];
-        width = first.getWidth();
-        height = first.getHeight();
+        size(first.getWidth(), first.getHeight());
 
         for (int i = 0; i < files.length; i++) {
             var image = images[i];
@@ -55,24 +55,26 @@ public class Actor {
                 throw new IllegalStateException(msg);
             }
         }
+
         return this;
     }
 
     public Actor size(int width, int height) {
         this.width = width;
         this.height = height;
+        revalidate();
         return this;
     }
 
     public Actor pos(int x, int y) {
         this.x = x;
         this.y = y;
+        setLocation(x, y);
         return this;
     }
 
     public Actor scale(double scale) {
-        this.width *= scale;
-        this.height *= scale;
+        size((int) (width * scale), (int) (height * scale));
         return this;
     }
 
@@ -81,19 +83,45 @@ public class Actor {
         return this;
     }
 
-    public void draw(Graphics frame) {
-        int imageWidth = width;
-        int imageHeight = height;
-        frame.drawImage(images[animationFrame], x,  y, imageWidth, imageHeight, null);
+    public Actor flip() {
+        this.flip = !this.flip;
+        return this;
+    }
+
+    public Actor flip(boolean flipState) {
+        this.flip = flipState;
+        return this;
+    }
+
+    @Override
+    public Rectangle getBounds() {
+        return new Rectangle(x, y, width, height);
+    }
+
+    @Override
+    public Dimension getPreferredSize() {
+        return new Dimension(width, height);
+    }
+
+    @Override
+    public void paintComponent(Graphics frame) {
+        super.paintComponent(frame);
+        BufferedImage img = images[animationFrame];
+        if (flip) {
+            frame.drawImage(img, 0, 0, width, height, img.getWidth(), 0, 0, img.getHeight(), null);
+        } else {
+            frame.drawImage(img, 0, 0, width, height, null);
+        }
     }
 
     public void update() {
         long now = System.currentTimeMillis();
         long elapsed = now - animationTimer;
-        if (elapsed > animationRate) {
+        if (elapsed > animationRate && images.length > 0) {
             animationTimer = now;
             animationFrame = (animationFrame + 1) % images.length;
         }
+        pos(x, y);
     }
 
     /**
@@ -108,6 +136,7 @@ public class Actor {
             case LEFT -> this.x -= amount;
             case RIGHT -> this.x += amount;
         }
+        pos(x, y);
     }
 
     public boolean isColliding(Actor other) {
@@ -125,5 +154,6 @@ public class Actor {
     /**
      * Override this to implement any logic that relies on collisions
      */
-    public void onCollision(Actor other) {}
+    public void onCollision(Actor other) {
+    }
 }

@@ -2,12 +2,14 @@ import javax.swing.*;
 import java.awt.*;
 
 public class Main {
+    public static JFrame window;
+
     public static void main(String[] args) {
         EventQueue.invokeLater(Main::init);
     }
 
     private static void init() {
-        JFrame window = new JFrame("Testing, testing...");
+        window = new JFrame("Testing, testing...");
         // when we close the window, stop the app
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 

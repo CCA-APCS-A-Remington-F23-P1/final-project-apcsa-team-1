@@ -4,3 +4,4 @@ build/
 out/
 csa-project.iml
 target/
+**/*.tar

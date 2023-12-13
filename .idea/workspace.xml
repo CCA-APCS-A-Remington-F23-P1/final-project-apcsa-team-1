@@ -5,12 +5,90 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dacc652d-80bc-44c7-80bc-abad51fa150d" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Animal.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Player.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/arcade-bgm.wav" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/background.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images.tar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/brachiosaurus/brachiosaurus1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/brachiosaurus/brachiosaurus2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/catepillar/caterpillar1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/catepillar/caterpillar2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/clownfish/clownfish1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/clownfish/clownfish2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/cobra/cobra1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/cobra/cobra2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/cow/cow1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/cow/cow2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/deer/deer1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/deer/deer2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/donkey/donkey1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/donkey/donkey2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/duck/duck1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/duck/duck2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/eagle/eagle1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/eagle/eagle2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/frog/frog1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/frog/frog2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/grasshopper/grasshopper1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/grasshopper/grasshopper2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/horse/horse1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/horse/horse2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/ladybug/ladybug1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/ladybug/ladybug2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/lion/lion1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/lion/lion2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/moose/moose1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/moose/moose2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/mouse/mouse1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/mouse/mouse2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/octopus/octopus1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/octopus/octopus2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/parrot/parrot1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/parrot/parrot2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/pig/pig1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/pig/pig2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/pterodactyl/pterodactyl1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/pterodactyl/pterodactyl2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/pufferfish/pufferfish1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/pufferfish/pufferfish2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/rat/rat1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/rat/rat2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/reindeer/reindeer1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/reindeer/reindeer2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/shark/shark1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/shark/shark2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/sheep/sheep1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/sheep/sheep2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/squirrel/squirrel1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/squirrel/squirrel2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/tiger/tiger1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/tiger/tiger2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/toucan/toucan1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/toucan/toucan2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/trex/trex1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/trex/trex2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/triceratops/triceratops1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/triceratops/triceratops2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/wolf/wolf1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/wolf/wolf2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/zebra/zebra1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/zebra/zebra2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/replit.nix" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scores.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ExampleScene.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/GameIntroScene.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Obstacle.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Scene.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Score.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ScoreReader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/Makefile" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Actor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Actor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Animal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Animal.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Direction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Direction.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Game.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/State.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/State.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,10 +108,10 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "customColor": "",
-  "associatedIndex": -1
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: -1
+}</component>
   <component name="ProjectId" id="2ZCJlS4IupzVuLTr8gAi2hKC5Bq" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
@@ -42,15 +120,21 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
-    "last_opened_file_path": "/home/unvariant/code/csa-project"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;ASKED_MARK_IGNORED_FILES_AS_EXCLUDED&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/unvariant/code/csa-project&quot;
   }
-}]]></component>
+}</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/images/mouse" />
+    </key>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
