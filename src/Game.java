@@ -35,7 +35,7 @@ public class Game extends JPanel implements ActionListener, KeyListener {
         for (var type : Animal.Type.values()) {
             var animal = new Animal(type);
             animal.pos(rand(MAIN_WIDTH), TOPBAR_HEIGHT + rand(MAIN_HEIGHT));
-            animal.animationRate(400);
+            animal.animationRate(401);
             animals.add(animal);
             add(animal);
             animal.setVisible(false);
