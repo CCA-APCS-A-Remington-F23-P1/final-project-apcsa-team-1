@@ -26,3 +26,4 @@ config:
 
 pull: config
 	git pull
+	git
