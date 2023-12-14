@@ -151,10 +151,10 @@ public class Actor extends JLabel {
      */
     public void translate(Direction direction, int amount) {
         switch (direction) {
-            case UP -> this.y -= amount;
-            case DOWN -> this.y += amount;
-            case LEFT -> this.x -= amount;
-            case RIGHT -> this.x += amount;
+            case UP: this.y -= amount; break;
+            case DOWN: this.y += amount; break;
+            case LEFT: this.x -= amount; break;
+            case RIGHT: this.x += amount; break;
         }
         pos(x, y);
     }

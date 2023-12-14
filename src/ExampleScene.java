@@ -28,8 +28,9 @@ public class ExampleScene extends Scene {
     public void actionPerformed(ActionEvent e) {
         var action = e.getActionCommand();
         if (action != null) switch(action) {
-            case BUTTON_ACTION -> {
+            case BUTTON_ACTION: {
                 System.out.println("I was pressed");
+                break;
             }
         }
         super.actionPerformed(e);

@@ -30,7 +30,7 @@ public class Main {
     }
 
     public static void pop() {
-        layer.remove(popups.removeLast());
+        layer.remove(popups.remove(popups.size() - 1));
     }
 
     public static void set(Scene scene) {
