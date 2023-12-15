@@ -10,6 +10,7 @@ public class Animal extends Actor {
     private long timer;
     private int oldWidth;
     private int oldHeight;
+
     public Animal(Type type) {
         super();
 
@@ -54,10 +55,10 @@ public class Animal extends Actor {
 
     @Override
     public Actor pos(int ix, int iy) {
-        var TOP = Game.TOPBAR_HEIGHT + Game.MAIN_HEIGHT;
+        var TOP = Main.TOPBAR_HEIGHT + Main.MAIN_HEIGHT;
         ix = Math.max(ix, 0);
-        iy = Math.max(iy, Game.TOPBAR_HEIGHT);
-        if (ix + width > Game.WIDTH) ix = Game.WIDTH - width;
+        iy = Math.max(iy, Main.TOPBAR_HEIGHT);
+        if (ix + width > Main.WIDTH) ix = Main.WIDTH - width;
         if (iy + height > TOP) iy = TOP - height;
         return super.pos(ix, iy);
     }
@@ -66,19 +67,21 @@ public class Animal extends Actor {
     public void update() {
         super.update();
 
-        if (pressed) {
-            Point screen = MouseInfo.getPointerInfo().getLocation();
-            Point target = new Point(screen.x - Main.window.getLocationOnScreen().x, screen.y - Main.window.getLocationOnScreen().y);
+        if (isActive()) {
+            if (pressed) {
+                Point screen = MouseInfo.getPointerInfo().getLocation();
+                Point target = new Point(screen.x - Main.window.getLocationOnScreen().x, screen.y - Main.window.getLocationOnScreen().y);
 
-            long now = System.currentTimeMillis();
-            double elapsed = (double) (now - timer) / 1000;
-            timer = now;
+                long now = System.currentTimeMillis();
+                double elapsed = (double) (now - timer) / 1000;
+                timer = now;
 
-            double lerp = 6.0 * elapsed;
-            var distance = new Point(target.x - (x + width / 2), target.y - (y + height / 2));
-            var velocity = new Point((int) (distance.x * lerp), (int) (distance.y * lerp));
+                double lerp = 6.0 * elapsed;
+                var distance = new Point(target.x - (x + width / 2), target.y - (y + height / 2));
+                var velocity = new Point((int) (distance.x * lerp), (int) (distance.y * lerp));
 
-            pos(x + velocity.x, y + velocity.y);
+                pos(x + velocity.x, y + velocity.y);
+            }
         }
     }
 

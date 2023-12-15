@@ -7,6 +7,7 @@ OUTPUT_FILES:=$(patsubst $(SOURCE_DIR)/%.java,$(BUILD_DIR)/%.class,$(SOURCE_FILE
 
 $(OUTPUT_FILES): $(SOURCE_FILES)
 	javac $(SOURCE_FILES) -d $(BUILD_DIR)
+	echo "[+] Done compiling"
 
 run: $(OUTPUT_FILES)
 	java -cp $(BUILD_DIR) Main

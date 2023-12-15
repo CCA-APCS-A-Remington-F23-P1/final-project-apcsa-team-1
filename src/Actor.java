@@ -13,11 +13,12 @@ public class Actor extends JLabel {
     public int height;
     public int x;
     public int y;
-    public double scale = 1.0;
     public boolean flip = false;
     private int animationFrame = 0;
     private int animationRate = 100;
     private long animationTimer = System.currentTimeMillis();
+    private boolean rebound = true;
+    private boolean active = true;
 
     public Actor() {
     }
@@ -59,22 +60,22 @@ public class Actor extends JLabel {
         return this;
     }
 
-    public Actor size(int width, int height) {
-        this.width = width;
-        this.height = height;
-        revalidate();
+    public Actor size(int w, int h) {
+        width = w;
+        height = h;
+        rebound = true;
         return this;
     }
 
     public Actor pos(int x, int y) {
         this.x = x;
         this.y = y;
-        setLocation(x, y);
+        rebound = true;
         return this;
     }
 
-    public Actor scale(double scale) {
-        size((int) (width * scale), (int) (height * scale));
+    public Actor scale(double newScale) {
+        size((int)(width * newScale), (int)(height * newScale));
         return this;
     }
 
@@ -91,6 +92,18 @@ public class Actor extends JLabel {
     public Actor flip(boolean flipState) {
         this.flip = flipState;
         return this;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void activate() {
+        active = true;
+    }
+
+    public void deactivate() {
+        active = false;
     }
 
     @Override
@@ -115,13 +128,20 @@ public class Actor extends JLabel {
     }
 
     public void update() {
-        long now = System.currentTimeMillis();
-        long elapsed = now - animationTimer;
-        if (elapsed > animationRate && images.length > 0) {
-            animationTimer = now;
-            animationFrame = (animationFrame + 1) % images.length;
+        if (isActive()) {
+            if (rebound) {
+                setBounds(x, y, width, height);
+                revalidate();
+                rebound = false;
+            }
+
+            long now = System.currentTimeMillis();
+            long elapsed = now - animationTimer;
+            if (elapsed > animationRate && images.length > 0) {
+                animationTimer = now;
+                animationFrame = (animationFrame + 1) % images.length;
+            }
         }
-        pos(x, y);
     }
 
     /**
@@ -131,10 +151,10 @@ public class Actor extends JLabel {
      */
     public void translate(Direction direction, int amount) {
         switch (direction) {
-            case UP -> this.y -= amount;
-            case DOWN -> this.y += amount;
-            case LEFT -> this.x -= amount;
-            case RIGHT -> this.x += amount;
+            case UP: this.y -= amount; break;
+            case DOWN: this.y += amount; break;
+            case LEFT: this.x -= amount; break;
+            case RIGHT: this.x += amount; break;
         }
         pos(x, y);
     }

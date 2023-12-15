@@ -1,5 +1,6 @@
 public enum State {
     RUNNING,
     DEAD,
-    STARTING
+    STARTING,
+    TESTING,
 }
