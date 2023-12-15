@@ -1,4 +1,4 @@
-import java.swing.*;
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 
@@ -20,23 +20,18 @@ public class Help extends Scene {
   @Override
   public void paintComponent(Graphics frame) {
     super.paintComponent(frame);
-    frame.setColor(Color.WHITE);
-    frame.fillRect(0, 0, Main.WIDTH, Main.HEIGHT);
-    frame.setColor(Color.BLACK);
-    frame.fillRect(0, 0, Main.WIDTH, Main.TOPBAR_HEIGHT);
-    frame.setColor(Color.GREEN);
-    frame.fillRect(0, Main.HEIGHT - Main.TRACK_HEIGHT, Main.WIDTH, Main.TRACK_HEIGHT);
+
     frame.drawString("Rules: ", 50, 50);
-    frome.drawString("You have to stop the prey before it reaches the treasure. In order to do this you need to select the appropriate predator in time.", 50, 60);
+    frame.drawString("You have to stop the prey before it reaches the treasure. In order to do this you need to select the appropriate predator in time.", 50, 60);
     frame.drawString("List of predators and their corresponding prey:", 50, 60);
     frame.drawString("Eagle: Duck, Parrot, Toucan", 50, 70);
-    frame.drawString("Frog: Caterpillar, Ladybug, Grasshopper", 50, 80");
+    frame.drawString("Frog: Caterpillar, Ladybug, Grasshopper", 50, 80);
     frame.drawString("Shark: Pufferfish, Clownfish, Octopus", 50, 90);
     frame.drawString("Wolf: Pig, Sheep, Cow", 50, 100);
     frame.drawString("Tiger: Deer, Reindeer, Moose", 50, 110);
     frame.drawString("Snake: Mouse, Rat, Squirrel", 50, 120);
-    frame.drawString("Lion: Horse, Donkey, Zebra", 50 130);
-    frame.drawString("T-Rex: Triceratops, Pterodactyl, Brachiosaurus", 50, 140");
+    frame.drawString("Lion: Horse, Donkey, Zebra", 50, 130);
+    frame.drawString("T-Rex: Triceratops, Pterodactyl, Brachiosaurus", 50, 140);
   }
 
   @Override

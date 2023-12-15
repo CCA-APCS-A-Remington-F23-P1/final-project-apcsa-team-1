@@ -27,7 +27,7 @@ public class Game extends Scene {
 
         for (var type : Animal.Type.values()) {
             var animal = new Animal(type);
-            animal.pos(rand(Main.MAIN_WIDTH), Main.TOPBAR_HEIGHT + rand(Main.MAIN_HEIGHT));
+            animal.pos(rand(Main.MAIN_WIDTH), rand(Main.MAIN_HEIGHT));
             animal.animationRate(400);
             animal.setVisible(false);
             animals.add(animal);
