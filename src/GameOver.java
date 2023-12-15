@@ -53,10 +53,9 @@ public class GameOver extends Scene {
         var action = e.getActionCommand();
         if (action != null) switch (action) {
             case BUTTON_ACTION_ONE:
-                
                 break;
             case BUTTON_ACTION_TWO:
-                
+                GameIntroScene.GameIntroScene();
                 break;
         }
     }
