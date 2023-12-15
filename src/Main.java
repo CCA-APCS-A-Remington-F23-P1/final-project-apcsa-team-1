@@ -1,20 +1,25 @@
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import static javax.swing.JLayeredPane.*;
 
 public class Main {
     public static final int WIDTH = 1200;
     public static final int HEIGHT = 800;
-    public static final int TOPBAR_HEIGHT = 150;
     public static final int TRACK_HEIGHT = 200;
-    public static final int MAIN_HEIGHT = HEIGHT - TOPBAR_HEIGHT - TRACK_HEIGHT;
+    public static final int MAIN_HEIGHT = HEIGHT - TRACK_HEIGHT;
     public static final int MAIN_WIDTH = WIDTH;
     public static final int FRAMERATE = 30;
     public static final State state = State.RUNNING;
     public static JFrame window;
+    public static Path IMAGE_DIR = Paths.get("images");
 
     private static Scene currentScene;
     private static final ArrayList<Scene> popups = new ArrayList<>();
@@ -22,6 +27,15 @@ public class Main {
 
     public static void main(String[] args) {
         EventQueue.invokeLater(Main::init);
+    }
+
+    public static BufferedImage loadImage(Path path) {
+        try {
+            return ImageIO.read(IMAGE_DIR.resolve(path).toFile());
+        } catch (IOException e) {
+            System.out.printf("[+] WARNING: failed to load image %s\n", path.toAbsolutePath().toString());
+        }
+        return null;
     }
 
     public static void push(Scene scene) {
