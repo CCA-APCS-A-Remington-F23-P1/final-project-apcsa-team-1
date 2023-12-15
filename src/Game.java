@@ -4,6 +4,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.image.BufferedImage;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -12,6 +15,7 @@ import static java.awt.event.KeyEvent.*;
 
 public class Game extends Scene {
     private final ArrayList<Animal> animals = new ArrayList<>();
+    private final static BufferedImage BACKGROUND = Main.loadImage(Paths.get("forest-background.png"));
 
     public Game() {
         // set the game board size
@@ -31,22 +35,22 @@ public class Game extends Scene {
         }
 
         animals.stream().filter(animal -> animal.type.isPredator()).forEach(animal -> animal.setVisible(true));
-
-        var key = KeyStroke.getKeyStroke(VK_ESCAPE, 0, false);
-        getInputMap(WHEN_IN_FOCUSED_WINDOW).put(key, key.hashCode());
-        getActionMap().put(key.hashCode(), new AbstractAction() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                System.out.println("pressed");
-                if (isActive()) {
-                    Main.push(new ExampleScene());
-                    deactivate();
-                } else {
-                    Main.pop();
-                    activate();
-                }
-            }
-        });
+//
+//        var key = KeyStroke.getKeyStroke(VK_ESCAPE, 0, false);
+//        getInputMap(WHEN_IN_FOCUSED_WINDOW).put(key, key.hashCode());
+//        getActionMap().put(key.hashCode(), new AbstractAction() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                System.out.println("pressed");
+//                if (isActive()) {
+//                    Main.push(new ExampleScene());
+//                    deactivate();
+//                } else {
+//                    Main.pop();
+//                    activate();
+//                }
+//            }
+//        });
     }
 
     @Override
@@ -86,14 +90,9 @@ public class Game extends Scene {
 
     @Override
     public void paintComponent(Graphics frame) {
-        frame.setColor(Color.WHITE);
-        frame.fillRect(0, 0, Main.WIDTH, Main.HEIGHT);
+        super.paintComponent(frame);
 
-        frame.setColor(Color.BLACK);
-        frame.fillRect(0, 0, Main.WIDTH, Main.TOPBAR_HEIGHT);
-
-        frame.setColor(Color.GREEN);
-        frame.fillRect(0, Main.HEIGHT - Main.TRACK_HEIGHT, Main.WIDTH, Main.TRACK_HEIGHT);
+        frame.drawImage(BACKGROUND, 0, 0, Main.WIDTH, Main.HEIGHT, null);
     }
 
     public void update() {

@@ -55,9 +55,9 @@ public class Animal extends Actor {
 
     @Override
     public Actor pos(int ix, int iy) {
-        var TOP = Main.TOPBAR_HEIGHT + Main.MAIN_HEIGHT;
+        var TOP = Main.MAIN_HEIGHT;
         ix = Math.max(ix, 0);
-        iy = Math.max(iy, Main.TOPBAR_HEIGHT);
+        iy = Math.max(iy, 0);
         if (ix + width > Main.WIDTH) ix = Main.WIDTH - width;
         if (iy + height > TOP) iy = TOP - height;
         return super.pos(ix, iy);

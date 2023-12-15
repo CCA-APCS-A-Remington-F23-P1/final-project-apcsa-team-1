@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.awt.event.ActionEvent;
 
 // Display game over  (DONE)
-// Display score  (DONE) "I think"
+// Display score (DONE) "I think"
 // Button to restart 
 // Button to return to main menu.
 

@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.util.stream.Stream;
 
 public class Actor extends JLabel {
-    public static final File IMAGES = new File("images");
+    public static final File IMAGES = new File("images/actors");
     public BufferedImage[] images;
     public int width;
     public int height;
