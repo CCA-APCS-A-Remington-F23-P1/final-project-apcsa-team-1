@@ -5,3 +5,5 @@ out/
 csa-project.iml
 target/
 **/*.tar
+.cache/
+.upm/
