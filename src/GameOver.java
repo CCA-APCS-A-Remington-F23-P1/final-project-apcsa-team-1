@@ -47,4 +47,17 @@ public class GameOver extends Scene {
     Game.centeredText(frame, "Game Over", new Rectangle(0, 0, Main.WIDTH, Main.HEIGHT));
     frame.drawString("Score: " + Main.score, Main.WIDTH / 2, Main.HEIGHT / 2 - 50);
   }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        var action = e.getActionCommand();
+        if (action != null) switch (action) {
+            case BUTTON_ACTION_ONE:
+                
+                break;
+            case BUTTON_ACTION_TWO:
+                
+                break;
+        }
+    }
 }
