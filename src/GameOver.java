@@ -18,7 +18,7 @@ import java.awt.event.ActionEvent;
 public class GameOver extends Scene {
   // private final BufferedImage backgroundImage;
   private static final String BUTTON_ACTION_ONE = "i was pressed";
-  private static final String BUTTON_ACTION_TWO = "i was pressed";
+  private static final String BUTTON_ACTION_TWO = "i was pressed as well";
 
   JButton reset = new JButton("Restart");
   JButton menu = new JButton("Back to Main Menu");
@@ -53,10 +53,10 @@ public class GameOver extends Scene {
         var action = e.getActionCommand();
         if (action != null) switch (action) {
             case BUTTON_ACTION_ONE:
-                
+                Main.set(new Game());
                 break;
             case BUTTON_ACTION_TWO:
-                
+                Main.set(new GameIntroScene());
                 break;
         }
     }
