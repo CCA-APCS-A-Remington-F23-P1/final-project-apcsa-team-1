@@ -26,14 +26,22 @@ public class GameOver extends Scene {
     
     reset.setActionCommand(BUTTON_ACTION_ONE);
     reset.addActionListener(this);
+    reset.setText("Help");
     reset.setFocusable(false);
+    reset.setFont(new Font("Monospace", Font.PLAIN, 128));
+    reset.setForeground(Color.WHITE);
+    reset.setBackground(Color.RED);
     reset.setBounds(Main.WIDTH / 2, Main.HEIGHT / 2, 100, 50);
     add(reset);
 
     menu.setActionCommand(BUTTON_ACTION_TWO);
     menu.addActionListener(this);
+    menu.setText("Back to Main Menu");
     menu.setFocusable(false);
-    menu.setBounds(Main.WIDTH / 2, Main.HEIGHT / 2 + 50, 100, 50);
+    menu.setFont(new Font("Monospace", Font.PLAIN, 128));
+    menu.setForeground(Color.WHITE);
+    menu.setBackground(Color.GREEN);
+    menu.setBounds(Main.WIDTH / 2, Main.HEIGHT / 2 + 100, 100, 50);
     add(menu);
 
     text.setEditable(false);
