@@ -37,8 +37,9 @@ public class Help extends Scene {
     frame.drawString("Tiger: Deer, Reindeer, Moose", 50, 260);
     frame.drawString("Snake: Mouse, Rat, Squirrel", 50, 290);
     frame.drawString("Lion: Horse, Donkey, Zebra", 50, 320);
-    frame.drawString("T-Rex: Triceratops, Pterodactyl, Brachiosaurus", 50, 350);   
-
+    frame.drawString("T-Rex: Triceratops, Pterodactyl, Brachiosaurus", 50, 350);
+  }
+  
   @Override
   public void actionPerformed(ActionEvent e) {
     var action = e.getActionCommand();
