@@ -58,31 +58,32 @@ public class GameOver extends Scene {
     text.setText("HELLO THERE");
     text.setBounds(0, 0, 500, 500);
     add(text);
+
+    JFrame window = new JFrame("Testing, testing...");
+
+    window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    window.setPreferredSize(new Dimension(400, 400));
+    window.setLayout(null);
+
+    JTextArea f = new JTextArea(16, 16);
+    f.setText(" GAME OVER\n" + " Score: " + Main.score);
+    f.setEditable(false);
+    f.setBounds(0, 0, 200, 200);
+    window.add(f);
+
+    window.setResizable(false);
+
+    window.pack();
+
+    window.setLocationRelativeTo(null);
+
+    window.setVisible(true);
+    window.createBufferStrategy(2);
   }
   
   @Override
   public void paintComponent(Graphics frame) {
         super.paintComponent(frame);
-        JFrame window = new JFrame("Testing, testing...");
-
-        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        window.setPreferredSize(new Dimension(400, 400));
-        window.setLayout(null);
-
-        JTextArea f = new JTextArea(16, 16);
-        f.setText(" GAME OVER\n" + " Score: " + Main.score);
-        f.setEditable(false);
-        f.setBounds(0, 0, 200, 200);
-        window.add(f);
-
-        window.setResizable(false);
-
-        window.pack();
-
-        window.setLocationRelativeTo(null);
-        
-        window.setVisible(true);
-        window.createBufferStrategy(2);
   }
 
     @Override
