@@ -10,16 +10,11 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.awt.event.ActionEvent;
 
-// Display game over  (DONE)
-// Display score (DONE) "I think"
-// Button to restart 
-// Button to return to main menu.
-
 public class GameOver extends Scene {
   // private final BufferedImage backgroundImage;
   private static final String BUTTON_ACTION_ONE = "i was pressed";
   private static final String BUTTON_ACTION_TWO = "i was pressed as well";
-
+    
   JButton reset = new JButton("Restart");
   JButton menu = new JButton("Back to Main Menu");
   JTextArea text = new JTextArea(20, 64);
