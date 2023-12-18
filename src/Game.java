@@ -58,7 +58,7 @@ public class Game extends Scene {
         }
         treasure.pos(Main.WIDTH - treasure.width, Main.HEIGHT - treasure.height);
         add(treasure);
-        finishLine = treasure.x;
+        finishLine = treasure.x + treasure.width / 2;
 //
 //        var key = KeyStroke.getKeyStroke(VK_ESCAPE, 0, false);
 //        getInputMap(WHEN_IN_FOCUSED_WINDOW).put(key, key.hashCode());
@@ -122,8 +122,11 @@ public class Game extends Scene {
     public void update() {
         long now = System.currentTimeMillis();
         long elapsed = now - startTime;
+        double percent = (double) elapsed / (levelSeconds * 1000.0);
+        int preypos = Math.min(finishLine, (int)((double) finishLine * percent));
+
         if (isActive()) {
-            prey.translate(Direction.RIGHT, finishLine * 1000);
+            prey.pos(preypos, prey.y);
 
             animals.sort((a, b) -> Long.compare(b.hoveredTime, a.hoveredTime));
             IntStream.range(0, animals.size()).forEach(i -> setComponentZOrder(animals.get(i), i));
