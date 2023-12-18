@@ -20,11 +20,16 @@ public class Game extends Scene {
     private final Actor treasure = new Actor().frames(Paths.get("treasurechest.png"));
     private final ArrayList<Animal> animals = new ArrayList<>();
     private final static BufferedImage BACKGROUND = Main.loadImage(Paths.get("images", "forest-background.png"));
-    private int levelSeconds = 1;
     private int finishLine;
     private long startTime = System.currentTimeMillis();
+    private long levelMillis;
 
-    public Game() {
+    public double levelSeconds;
+
+    public Game(double seconds) {
+        levelSeconds = seconds;
+        levelMillis = (long)(seconds * 1000.0);
+
         // set the game board size
         setPreferredSize(new Dimension(Main.WIDTH, Main.HEIGHT));
         // set the game board background color
@@ -36,6 +41,9 @@ public class Game extends Scene {
             if (type.isPrey()) continue;
 
             var animal = new Animal(type);
+            if (animal.height > 150) {
+                animal.scale(150.0 / animal.height);
+            }
             animal.pos(rand(Main.MAIN_WIDTH), rand(Main.MAIN_HEIGHT - 300));
             animal.animationRate(400);
             animal.setVisible(false);
@@ -50,7 +58,7 @@ public class Game extends Scene {
         if (prey.height > Main.TRACK_HEIGHT) {
             prey.scale(200.0 / prey.height);
         }
-        prey.pos(0, Main.HEIGHT - prey.height);
+        prey.pos(0, Main.HEIGHT - Main.TRACK_HEIGHT / 2 - prey.height / 2);
         add(prey);
 
         if (treasure.height > Main.TRACK_HEIGHT) {
@@ -111,7 +119,7 @@ public class Game extends Scene {
         if (isActive()) {
             long now = System.currentTimeMillis();
             long elapsed = now - startTime;
-            double percent = (double) elapsed / (levelSeconds * 1000.0);
+            double percent = (double) elapsed / levelMillis;
             int preypos = Math.min(finishLine, (int)((double) finishLine * percent));
 
             prey.pos(preypos, prey.y);
@@ -119,6 +127,8 @@ public class Game extends Scene {
             for (var predator : animals) {
                 if (predator.pressed && predator.type.eats(prey.type)) {
                     Main.push(new NextLevel());
+                    deactivate();
+                    return;
                 }
             }
 

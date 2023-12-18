@@ -33,6 +33,16 @@ public class Scene extends JPanel implements ActionListener {
 
     public void reset() {}
 
+    public int textWidth(Font f, String msg) {
+        var metrics = getFontMetrics(f);
+        return metrics.stringWidth(msg);
+    }
+
+    public int textHeight(Font f, String msg) {
+        var metrics = getFontMetrics(f);
+        return metrics.getHeight();
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
 

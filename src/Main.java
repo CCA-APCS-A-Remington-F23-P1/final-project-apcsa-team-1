@@ -25,6 +25,7 @@ public class Main {
     public static JFrame window;
     public static Path IMAGE_DIR = Paths.get("images");
     public static Font BUTTON_FONT = new Font("MONOSPACE", Font.PLAIN, 64);
+    public static final int DEFAULT_GAME_SECONDS = 10;
 
     private static Scene currentScene;
     private static final ArrayList<Scene> popups = new ArrayList<>();
@@ -94,7 +95,8 @@ public class Main {
         layer.setBounds(0, 0, WIDTH, HEIGHT);
         window.add(layer);
 
-        set(new Game());
+        set(new Game(DEFAULT_GAME_SECONDS));
+        set(new Leaderboard());
 
         // don't allow the user to resize the window
         window.setResizable(false);

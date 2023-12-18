@@ -18,16 +18,6 @@ public class GameOver extends Scene {
   JButton reset = new JButton("Restart");
   JButton menu = new JButton("Back to Main Menu");
   JTextArea text = new JTextArea(20, 64);
-
-  private int textWidth(Font f, String msg) {
-      var metrics = getFontMetrics(f);
-      return metrics.stringWidth(msg);
-  }
-
-  public int textHeight(Font f, String msg) {
-      var metrics = getFontMetrics(f);
-      return metrics.getHeight();
-  }
   
   public GameOver(){
     super();
@@ -75,7 +65,7 @@ public class GameOver extends Scene {
         var action = e.getActionCommand();
         if (action != null) switch (action) {
             case BUTTON_ACTION_ONE:
-                Main.set(new Game());
+                Main.set(new Game(Main.DEFAULT_GAME_SECONDS));
                 break;
             case BUTTON_ACTION_TWO:
                 Main.set(new GameIntroScene(null));

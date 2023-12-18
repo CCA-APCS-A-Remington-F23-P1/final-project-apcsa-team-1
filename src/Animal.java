@@ -30,7 +30,6 @@ public class Animal extends Actor {
             @Override
             public void mouseReleased(MouseEvent e) {
                 pressed = false;
-                flip();
             }
 
             @Override
@@ -40,14 +39,18 @@ public class Animal extends Actor {
 
             @Override
             public void mouseEntered(MouseEvent e) {
-                oldWidth = width;
-                oldHeight = height;
-                scale(1.3);
+                if (isActive()) {
+                    oldWidth = width;
+                    oldHeight = height;
+                    scale(1.3);
+                }
             }
 
             @Override
             public void mouseExited(MouseEvent e) {
-                size(oldWidth, oldHeight);
+                if (isActive()) {
+                    size(oldWidth, oldHeight);
+                }
             }
         };
         addMouseListener(mouse);
