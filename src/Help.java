@@ -7,7 +7,10 @@ public class Help extends Scene {
   
   public Help(){
     super();
-    ImageIcon icon = new ImageIcon("helpButton.png");
+    ImageIcon icon = new ImageIcon("images/helpButton.png");
+    Image image = imageIcon.getImage();
+    Image newing = image.getScaledInstance(30, 30, java.awt.Image.SCALE_SMOOTH);
+    icon = newImageIcon(newing);
     setOpaque(false);
     JButton button = new JButton("Help");
     button.setActionCommand(BUTTON_ACTION);
