@@ -8,6 +8,9 @@ public class Help extends Scene {
   public Help(){
     super();
     ImageIcon icon = new ImageIcon("images/helpButton.png");
+    Image image = icon.getImage();
+    Image newing = image.getScaledInstance(30, 30, java.awt.Image.SCALE_SMOOTH);
+    icon = new ImageIcon(newing);
     setOpaque(false);
     JButton button = new JButton("Help");
     button.setActionCommand(BUTTON_ACTION);
@@ -19,7 +22,7 @@ public class Help extends Scene {
     button.setForeground(Color.white);
     button.setBackground(Color.blue);
     button.setBorder(BorderFactory.createRaisedBevelBorder());
-    button.setBounds(Main.WIDTH / 2 - 50, Main.HEIGHT / 2 - 50, icon.getIconWidth(), icon.getIconHeight());
+    button.setBounds(Main.WIDTH / 2 - 50, Main.HEIGHT / 2 - 50, 128, 64);
     add(button);
   }
 

@@ -89,7 +89,7 @@ public class Main {
         layer.setBounds(0, 0, WIDTH, HEIGHT);
         window.add(layer);
 
-        set(new Game());
+        set(new Help());
 
         // don't allow the user to resize the window
         window.setResizable(false);
