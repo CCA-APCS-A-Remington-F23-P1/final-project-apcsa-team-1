@@ -8,14 +8,21 @@ import java.awt.image.BufferedImage;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import static java.awt.event.KeyEvent.*;
 
 public class Game extends Scene {
+    private Animal prey;
+    private final Actor treasure = new Actor().frames(Paths.get("treasurechest.png"));
     private final ArrayList<Animal> animals = new ArrayList<>();
-    private final static BufferedImage BACKGROUND = Main.loadImage(Paths.get("forest-background.png"));
+    private final static BufferedImage BACKGROUND = Main.loadImage(Paths.get("images", "forest-background.png"));
+    private int levelSeconds = 10;
+    private int finishLine;
+    private long startTime = System.currentTimeMillis();
 
     public Game() {
         // set the game board size
@@ -26,15 +33,32 @@ public class Game extends Scene {
         setBounds(0, 0, Main.WIDTH, Main.HEIGHT);
 
         for (var type : Animal.Type.values()) {
+            if (type.isPrey()) continue;
+
             var animal = new Animal(type);
-            animal.pos(rand(Main.MAIN_WIDTH), rand(Main.MAIN_HEIGHT));
+            animal.pos(rand(Main.MAIN_WIDTH), rand(Main.MAIN_HEIGHT - 300));
             animal.animationRate(400);
             animal.setVisible(false);
             animals.add(animal);
             add(animal);
         }
 
-        animals.stream().filter(animal -> animal.type.isPredator()).forEach(animal -> animal.setVisible(true));
+        animals.forEach(animal -> animal.setVisible(true));
+
+        var preyList = Arrays.stream(Animal.Type.values()).filter(Animal.Type::isPrey).toList();
+        prey = new Animal(preyList.get((int)(Math.random() * preyList.size())));
+        if (prey.height > Main.TRACK_HEIGHT) {
+            prey.scale(200.0 / prey.height);
+        }
+        prey.pos(0, Main.HEIGHT - prey.height);
+        add(prey);
+
+        if (treasure.height > Main.TRACK_HEIGHT) {
+            treasure.scale(200.0 / treasure.height);
+        }
+        treasure.pos(Main.WIDTH - treasure.width, Main.HEIGHT - treasure.height);
+        add(treasure);
+        finishLine = treasure.x;
 //
 //        var key = KeyStroke.getKeyStroke(VK_ESCAPE, 0, false);
 //        getInputMap(WHEN_IN_FOCUSED_WINDOW).put(key, key.hashCode());
@@ -96,10 +120,17 @@ public class Game extends Scene {
     }
 
     public void update() {
+        long now = System.currentTimeMillis();
+        long elapsed = now - startTime;
         if (isActive()) {
+            prey.translate(Direction.RIGHT, finishLine * 1000);
+
             animals.sort((a, b) -> Long.compare(b.hoveredTime, a.hoveredTime));
             IntStream.range(0, animals.size()).forEach(i -> setComponentZOrder(animals.get(i), i));
             animals.forEach(Animal::update);
+
+            prey.update();
+            treasure.update();
         }
     }
 }

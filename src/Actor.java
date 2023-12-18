@@ -4,10 +4,12 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Arrays;
 import java.util.stream.Stream;
 
 public class Actor extends JLabel {
-    public static final File IMAGES = new File("images/actors");
     public BufferedImage[] images;
     public int width;
     public int height;
@@ -27,17 +29,8 @@ public class Actor extends JLabel {
      * Takes a path and appends it to the `images` folder, takes all images from the
      * result path and uses those as the animation images for this actor
      */
-    public Actor frames(String dir) {
-        File[] files = new File(IMAGES, dir).listFiles();
-        images = Stream.of(files)
-                .map(file -> {
-                    try {
-                        return ImageIO.read(file);
-                    } catch (IOException e) {
-                        throw new RuntimeException(e);
-                    }
-                })
-                .toArray(BufferedImage[]::new);
+    public Actor frames(Path dir) {
+        images = Main.loadImages(dir);
 
         if (images.length == 0) {
             size(0, 0);
@@ -46,16 +39,6 @@ public class Actor extends JLabel {
 
         var first = images[0];
         size(first.getWidth(), first.getHeight());
-
-        for (int i = 0; i < files.length; i++) {
-            var image = images[i];
-            int imageWidth = image.getWidth();
-            int imageHeight = image.getHeight();
-            var msg = String.format("%s is a %dx%d image, expected %dx%d", files[i].getAbsolutePath(), imageWidth, imageHeight, width, height);
-            if (imageWidth != width || imageHeight != height) {
-                throw new IllegalStateException(msg);
-            }
-        }
 
         return this;
     }

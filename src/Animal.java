@@ -1,6 +1,7 @@
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.nio.file.Paths;
 import java.util.List;
 
 public class Animal extends Actor {
@@ -15,7 +16,7 @@ public class Animal extends Actor {
         super();
 
         this.type = type;
-        frames(type.name().toLowerCase());
+        frames(Paths.get("actors").resolve(type.name().toLowerCase()));
         scale(type.customScaling);
         flip(type.flip);
 
@@ -55,7 +56,7 @@ public class Animal extends Actor {
 
     @Override
     public Actor pos(int ix, int iy) {
-        var TOP = Main.MAIN_HEIGHT;
+        var TOP = Main.HEIGHT;
         ix = Math.max(ix, 0);
         iy = Math.max(iy, 0);
         if (ix + width > Main.WIDTH) ix = Main.WIDTH - width;

@@ -22,6 +22,7 @@ public class GameOver extends Scene {
 
   JButton reset = new JButton("Restart");
   JButton menu = new JButton("Back to Main Menu");
+  JTextArea text = new JTextArea(20, 64);
   
   public GameOver(){
     super();
@@ -39,13 +40,21 @@ public class GameOver extends Scene {
     menu.setFocusable(false);
     menu.setBounds(Main.WIDTH / 2, Main.HEIGHT / 2 + 50, 100, 50);
     add(menu);
+
+    text.setEditable(false);
+    text.setText("HELLO THERE");
+    text.setBounds(0, 0, 500, 500);
+    add(text);
   }
   
   @Override
   public void paintComponent(Graphics frame) {
-    frame.setColor(Color.BLACK);
-    Game.centeredText(frame, "Game Over", new Rectangle(0, 0, Main.WIDTH, Main.HEIGHT));
-    frame.drawString("Score: " + Main.score, Main.WIDTH / 2, Main.HEIGHT / 2 - 50);
+      super.paintComponent(frame);
+//      text.setText("Game Over");
+//      text.append("Score: " + Main.score);
+//    frame.setColor(Color.BLACK);
+//    Game.centeredText(frame, "Game Over", new Rectangle(0, 0, Main.WIDTH, Main.HEIGHT));
+//    frame.drawString("Score: " + Main.score, Main.WIDTH / 2, Main.HEIGHT / 2 - 50);
   }
 
     @Override
@@ -56,7 +65,7 @@ public class GameOver extends Scene {
                 Main.set(new Game());
                 break;
             case BUTTON_ACTION_TWO:
-                Main.set(new GameIntroScene());
+                Main.set(new GameIntroScene(null));
                 break;
         }
     }

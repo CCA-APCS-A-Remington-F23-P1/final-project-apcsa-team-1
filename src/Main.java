@@ -4,10 +4,13 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.stream.Stream;
+
 import static javax.swing.JLayeredPane.*;
 
 public class Main {
@@ -26,21 +29,29 @@ public class Main {
     private static final ArrayList<Scene> popups = new ArrayList<>();
     private static JLayeredPane layer;
 
-    private static Scene currentScene;
-    private static final ArrayList<Scene> popups = new ArrayList<>();
-    private static JLayeredPane layer;
-
     public static void main(String[] args) {
         EventQueue.invokeLater(Main::init);
     }
 
     public static BufferedImage loadImage(Path path) {
         try {
-            return ImageIO.read(IMAGE_DIR.resolve(path).toFile());
+            return ImageIO.read(path.toFile());
         } catch (IOException e) {
             System.out.printf("[+] WARNING: failed to load image %s\n", path.toAbsolutePath().toString());
         }
         return null;
+    }
+
+    public static BufferedImage[] loadImages(Path path) {
+        File file = IMAGE_DIR.resolve(path).toFile();
+        if (file.isDirectory()) {
+            var files = file.listFiles();
+            return Stream.of(files)
+                    .map(f -> Main.loadImage(f.toPath()))
+                    .toArray(BufferedImage[]::new);
+        } else {
+            return new BufferedImage[]{ Main.loadImage(file.toPath()) };
+        }
     }
 
     public static void push(Scene scene) {
