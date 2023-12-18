@@ -16,7 +16,7 @@ public class GameOver extends Scene {
   private static final String BUTTON_ACTION_TWO = "i was pressed as well";
     
   JButton reset = new JButton("Restart");
-  JButton menu = new JButton("Back to Main Menu");
+  JButton menu = new JButton("Main Menu");
   JTextArea text = new JTextArea(20, 64);
 
   private int textWidth(Font f, String msg) {
@@ -62,12 +62,27 @@ public class GameOver extends Scene {
   
   @Override
   public void paintComponent(Graphics frame) {
-      super.paintComponent(frame);
-//      text.setText("Game Over");
-//      text.append("Score: " + Main.score);
-//    frame.setColor(Color.BLACK);
-//    Game.centeredText(frame, "Game Over", new Rectangle(0, 0, Main.WIDTH, Main.HEIGHT));
-//    frame.drawString("Score: " + Main.score, Main.WIDTH / 2, Main.HEIGHT / 2 - 50);
+        super.paintComponent(frame);
+        JFrame window = new JFrame("Testing, testing...");
+
+        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        window.setPreferredSize(new Dimension(400, 400));
+        window.setLayout(null);
+
+        JTextField f = new JTextField(16);
+        f.setText("GAME OVER\n" + "Score: " + Main.score);
+        f.setEditable(false);
+        f.setBounds(0, 0, 200, 200);
+        window.add(f);
+
+        window.setResizable(false);
+
+        window.pack();
+
+        window.setLocationRelativeTo(null);
+        
+        window.setVisible(true);
+        window.createBufferStrategy(2);
   }
 
     @Override
