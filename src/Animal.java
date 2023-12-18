@@ -7,7 +7,7 @@ import java.util.List;
 public class Animal extends Actor {
     public final Type type;
     public long hoveredTime = 0;
-    private boolean pressed;
+    public boolean pressed;
     private long timer;
     private int oldWidth;
     private int oldHeight;
@@ -142,6 +142,45 @@ public class Animal extends Actor {
 
         public boolean isPredator() {
             return PREDATORS.contains(this);
+        }
+
+        public boolean eats(Type other) {
+            switch (other) {
+                case DUCK:
+                case PARROT:
+                case TOUCAN:
+                    return this == Type.EAGLE;
+                case CATEPILLAR:
+                case LADYBUG:
+                case GRASSHOPPER:
+                    return this == Type.FROG;
+                case PUFFERFISH:
+                case CLOWNFISH:
+                case OCTOPUS:
+                    return this == Type.SHARK;
+                case PIG:
+                case SHEEP:
+                case COW:
+                    return this == Type.WOLF;
+                case DEER:
+                case REINDEER:
+                case MOOSE:
+                    return this == Type.TIGER;
+                case MOUSE:
+                case RAT:
+                case SQUIRREL:
+                    return this == Type.COBRA;
+                case HORSE:
+                case DONKEY:
+                case ZEBRA:
+                    return this == Type.LION;
+                case TRICERATOPS:
+                case PTERODACTYL:
+                case BRACHIOSAURUS:
+                    return this == Type.TREX;
+                default:
+                    return false;
+            }
         }
 
         public boolean isPrey() {

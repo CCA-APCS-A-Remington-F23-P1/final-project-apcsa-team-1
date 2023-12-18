@@ -31,6 +31,8 @@ public class Scene extends JPanel implements ActionListener {
 
     public void update() {}
 
+    public void reset() {}
+
     @Override
     public void actionPerformed(ActionEvent e) {
 

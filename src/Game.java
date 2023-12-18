@@ -58,7 +58,7 @@ public class Game extends Scene {
         }
         treasure.pos(Main.WIDTH - treasure.width, Main.HEIGHT - treasure.height);
         add(treasure);
-        finishLine = treasure.x + treasure.width / 2;
+        finishLine = treasure.x + treasure.width / 2 - prey.width;
 //
 //        var key = KeyStroke.getKeyStroke(VK_ESCAPE, 0, false);
 //        getInputMap(WHEN_IN_FOCUSED_WINDOW).put(key, key.hashCode());
@@ -100,18 +100,6 @@ public class Game extends Scene {
         frame.drawString(text, x, y);
     }
 
-    private void startGame(Graphics frame) {
-        frame.setColor(Color.WHITE);
-
-        setFont(new Font("Monospace", Font.PLAIN, 128));
-        var bounds = new Rectangle(0, 0, Main.WIDTH, Main.HEIGHT * 3 / 4);
-        centeredText(frame, "Game Title", bounds);
-
-        setFont(new Font("Monospace", Font.PLAIN, 64));
-        var startBounds = new Rectangle(0, Main.HEIGHT / 2, Main.WIDTH, Main.HEIGHT / 2);
-        centeredText(frame, "[ press space ]", startBounds);
-    }
-
     @Override
     public void paintComponent(Graphics frame) {
         super.paintComponent(frame);
@@ -120,13 +108,23 @@ public class Game extends Scene {
     }
 
     public void update() {
-        long now = System.currentTimeMillis();
-        long elapsed = now - startTime;
-        double percent = (double) elapsed / (levelSeconds * 1000.0);
-        int preypos = Math.min(finishLine, (int)((double) finishLine * percent));
-
         if (isActive()) {
+            long now = System.currentTimeMillis();
+            long elapsed = now - startTime;
+            double percent = (double) elapsed / (levelSeconds * 1000.0);
+            int preypos = Math.min(finishLine, (int)((double) finishLine * percent));
+
             prey.pos(preypos, prey.y);
+
+            for (var predator : animals) {
+                if (predator.pressed && predator.type.eats(prey.type)) {
+                    Main.push(new NextLevel());
+                }
+            }
+
+            if (prey.isColliding(treasure)) {
+                Main.push(new GameOver());
+            }
 
             animals.sort((a, b) -> Long.compare(b.hoveredTime, a.hoveredTime));
             IntStream.range(0, animals.size()).forEach(i -> setComponentZOrder(animals.get(i), i));

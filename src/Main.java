@@ -24,6 +24,7 @@ public class Main {
     public static final State state = State.RUNNING;
     public static JFrame window;
     public static Path IMAGE_DIR = Paths.get("images");
+    public static Font BUTTON_FONT = new Font("MONOSPACE", Font.PLAIN, 128);
 
     private static Scene currentScene;
     private static final ArrayList<Scene> popups = new ArrayList<>();
@@ -63,6 +64,10 @@ public class Main {
         layer.remove(popups.remove(popups.size() - 1));
     }
 
+    public static Scene current() {
+        return currentScene;
+    }
+
     public static void set(Scene scene) {
         if (currentScene != null) {
             layer.remove(currentScene);
@@ -89,7 +94,7 @@ public class Main {
         layer.setBounds(0, 0, WIDTH, HEIGHT);
         window.add(layer);
 
-        set(new Help());
+        set(new Game());
 
         // don't allow the user to resize the window
         window.setResizable(false);
