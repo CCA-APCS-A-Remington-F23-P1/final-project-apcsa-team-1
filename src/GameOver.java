@@ -69,8 +69,8 @@ public class GameOver extends Scene {
         window.setPreferredSize(new Dimension(400, 400));
         window.setLayout(null);
 
-        JTextField f = new JTextField(16);
-        f.setText("GAME OVER\n" + "Score: " + Main.score);
+        JTextArea f = new JTextArea(16, 16);
+        f.setText(" GAME OVER\n" + " Score: " + Main.score);
         f.setEditable(false);
         f.setBounds(0, 0, 200, 200);
         window.add(f);
