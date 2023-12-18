@@ -4,15 +4,21 @@ import java.awt.event.ActionEvent;
 
 public class Help extends Scene {
   private static final String BUTTON_ACTION = "i was pressed";
-
+  
   public Help(){
     super();
+    ImageIcon icon = new ImageIcon("helpButton.png");
     setOpaque(false);
     JButton button = new JButton("Help");
     button.setActionCommand(BUTTON_ACTION);
     button.addActionListener(this);
+    button.setText("Help");
     button.setFocusable(false);
-
+    button.setIcon(icon);
+    button.setFont(new Font("Comic Sans", Font.BOLD, 25));
+    button.setForeground(Color.white);
+    button.setBackground(Color.blue);
+    button.setBorder(BorderFactory.createRaisedBevelBorder());
     button.setBounds(Main.WIDTH / 2 - 50, Main.HEIGHT / 2 - 50, 100, 50);
     add(button);
   }
@@ -31,9 +37,9 @@ public class Help extends Scene {
     frame.drawString("Tiger: Deer, Reindeer, Moose", 50, 260);
     frame.drawString("Snake: Mouse, Rat, Squirrel", 50, 290);
     frame.drawString("Lion: Horse, Donkey, Zebra", 50, 320);
-    frame.drawString("T-Rex: Triceratops, Pterodactyl, Brachiosaurus", 50, 350); 
+    frame.drawString("T-Rex: Triceratops, Pterodactyl, Brachiosaurus", 50, 350);
   }
-
+  
   @Override
   public void actionPerformed(ActionEvent e) {
     var action = e.getActionCommand();
