@@ -10,16 +10,11 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.awt.event.ActionEvent;
 
-// Display game over  (DONE)
-// Display score (DONE) "I think"
-// Button to restart 
-// Button to return to main menu.
-
 public class GameOver extends Scene {
   // private final BufferedImage backgroundImage;
   private static final String BUTTON_ACTION_ONE = "i was pressed";
   private static final String BUTTON_ACTION_TWO = "i was pressed as well";
-
+    
   JButton reset = new JButton("Restart");
   JButton menu = new JButton("Back to Main Menu");
   JTextArea text = new JTextArea(20, 64);
@@ -31,14 +26,22 @@ public class GameOver extends Scene {
     
     reset.setActionCommand(BUTTON_ACTION_ONE);
     reset.addActionListener(this);
+    reset.setText("Help");
     reset.setFocusable(false);
+    reset.setFont(new Font("Monospace", Font.PLAIN, 128));
+    reset.setForeground(Color.WHITE);
+    reset.setBackground(Color.RED);
     reset.setBounds(Main.WIDTH / 2, Main.HEIGHT / 2, 100, 50);
     add(reset);
 
     menu.setActionCommand(BUTTON_ACTION_TWO);
     menu.addActionListener(this);
+    menu.setText("Back to Main Menu");
     menu.setFocusable(false);
-    menu.setBounds(Main.WIDTH / 2, Main.HEIGHT / 2 + 50, 100, 50);
+    menu.setFont(new Font("Monospace", Font.PLAIN, 128));
+    menu.setForeground(Color.WHITE);
+    menu.setBackground(Color.GREEN);
+    menu.setBounds(Main.WIDTH / 2, Main.HEIGHT / 2 + 100, 100, 50);
     add(menu);
 
     text.setEditable(false);
