@@ -20,7 +20,7 @@ public class Game extends Scene {
     private final Actor treasure = new Actor().frames(Paths.get("treasurechest.png"));
     private final ArrayList<Animal> animals = new ArrayList<>();
     private final static BufferedImage BACKGROUND = Main.loadImage(Paths.get("images", "forest-background.png"));
-    private int levelSeconds = 10;
+    private int levelSeconds = 1;
     private int finishLine;
     private long startTime = System.currentTimeMillis();
 

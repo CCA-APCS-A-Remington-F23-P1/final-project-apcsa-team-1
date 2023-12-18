@@ -18,6 +18,16 @@ public class GameOver extends Scene {
   JButton reset = new JButton("Restart");
   JButton menu = new JButton("Back to Main Menu");
   JTextArea text = new JTextArea(20, 64);
+
+  private int textWidth(Font f, String msg) {
+      var metrics = getFontMetrics(f);
+      return metrics.stringWidth(msg);
+  }
+
+  public int textHeight(Font f, String msg) {
+      var metrics = getFontMetrics(f);
+      return metrics.getHeight();
+  }
   
   public GameOver(){
     super();
@@ -26,22 +36,22 @@ public class GameOver extends Scene {
     
     reset.setActionCommand(BUTTON_ACTION_ONE);
     reset.addActionListener(this);
-    reset.setText("Help");
+    reset.setText("Restart");
     reset.setFocusable(false);
-    reset.setFont(new Font("Monospace", Font.PLAIN, 128));
+    reset.setFont(Main.BUTTON_FONT);
     reset.setForeground(Color.WHITE);
     reset.setBackground(Color.RED);
-    reset.setBounds(Main.WIDTH / 2, Main.HEIGHT / 2, 100, 50);
+    reset.setBounds(Main.WIDTH / 2, Main.HEIGHT / 2, textWidth(Main.BUTTON_FONT, reset.getText()) + 64, textHeight(Main.BUTTON_FONT, reset.getText()));
     add(reset);
 
     menu.setActionCommand(BUTTON_ACTION_TWO);
     menu.addActionListener(this);
-    menu.setText("Back to Main Menu");
+    menu.setText("Main Menu");
     menu.setFocusable(false);
-    menu.setFont(new Font("Monospace", Font.PLAIN, 128));
+    menu.setFont(Main.BUTTON_FONT);
     menu.setForeground(Color.WHITE);
     menu.setBackground(Color.GREEN);
-    menu.setBounds(Main.WIDTH / 2, Main.HEIGHT / 2 + 100, 100, 50);
+    menu.setBounds(Main.WIDTH / 2, Main.HEIGHT / 2 + 100, textWidth(Main.BUTTON_FONT, menu.getText()) + 64, textHeight(Main.BUTTON_FONT, menu.getText()));
     add(menu);
 
     text.setEditable(false);

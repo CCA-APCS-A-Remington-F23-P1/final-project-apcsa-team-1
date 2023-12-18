@@ -24,7 +24,7 @@ public class Main {
     public static final State state = State.RUNNING;
     public static JFrame window;
     public static Path IMAGE_DIR = Paths.get("images");
-    public static Font BUTTON_FONT = new Font("MONOSPACE", Font.PLAIN, 128);
+    public static Font BUTTON_FONT = new Font("MONOSPACE", Font.PLAIN, 64);
 
     private static Scene currentScene;
     private static final ArrayList<Scene> popups = new ArrayList<>();
