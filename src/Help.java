@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 public class Help extends Scene {
   private static final String BUTTON_ACTION = "i was pressed";
   private Animal prey;
+  private Image preyImage;
   
   public Help(){
     super();
@@ -12,23 +13,24 @@ public class Help extends Scene {
     Image image = icon.getImage();
     Image newing = image.getScaledInstance(30, 30, java.awt.Image.SCALE_SMOOTH);
     icon = new ImageIcon(newing);
-    setOpaque(false);
-    JButton button = new JButton("Help");
-    button.setActionCommand(BUTTON_ACTION);
-    button.addActionListener(this);
-    button.setText("Help");
-    button.setFocusable(false);
-    button.setIcon(icon);
-    button.setFont(new Font("Comic Sans", Font.BOLD, 25));
-    button.setForeground(Color.white);
-    button.setBackground(Color.blue);
-    button.setBorder(BorderFactory.createRaisedBevelBorder());
-    button.setBounds(Main.WIDTH / 2 - 50, Main.HEIGHT / 2 - 50, 128, 64);
-    add(button);
-    if (main.current() instanceof Game) {
-      prey = ((Game) main.current()).getPrey(); 
-      ImageIcon icon2 = new ImageIcon("images/" + prey.getName() + ".png");
-      Image preyImage = icon2.getImage();
+
+//    JButton button = new JButton("Help");
+//    button.setActionCommand(BUTTON_ACTION);
+//    button.addActionListener(this);
+//    button.setText("Help");
+//    button.setFocusable(false);
+//    button.setIcon(icon);
+//    button.setFont(new Font("Comic Sans", Font.BOLD, 25));
+//    button.setForeground(Color.white);
+//    button.setBackground(Color.blue);
+//    button.setBorder(BorderFactory.createRaisedBevelBorder());
+//    button.setBounds(Main.WIDTH / 2 - 50, Main.HEIGHT / 2 - 50, 128, 64);
+//    add(button);
+
+    if (Main.current() instanceof Game) {
+      prey = ((Game) Main.current()).prey;
+      ImageIcon icon2 = new ImageIcon("images/" + prey.type.name().toLowerCase() + ".png");
+      preyImage = icon2.getImage();
     }
   }
 
@@ -59,7 +61,5 @@ public class Help extends Scene {
           break;
       }
     }
-    super.actionPerformed(e);
-
   }
 }

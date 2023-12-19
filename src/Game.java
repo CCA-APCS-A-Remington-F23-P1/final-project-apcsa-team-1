@@ -19,15 +19,17 @@ import java.util.stream.IntStream;
 import static java.awt.event.KeyEvent.*;
 
 public class Game extends Scene {
-    private Animal prey;
     private final Actor treasure = new Actor().frames(Paths.get("treasurechest.png"));
     private final ArrayList<Animal> animals = new ArrayList<>();
     private final static BufferedImage BACKGROUND = Main.loadImage(Paths.get("images", "forest-background.png"));
     private int finishLine;
     private long startTime = System.currentTimeMillis();
+    private long elapsed;
     private long levelMillis;
     private int round = 0;
     private double levelSeconds;
+
+    public Animal prey;
 
     public Game() {
         levelSeconds = Main.DEFAULT_GAME_SECONDS;
@@ -41,34 +43,45 @@ public class Game extends Scene {
         setBounds(0, 0, Main.WIDTH, Main.HEIGHT);
 
         reset();
-//
-//        var key = KeyStroke.getKeyStroke(VK_ESCAPE, 0, false);
-//        getInputMap(WHEN_IN_FOCUSED_WINDOW).put(key, key.hashCode());
-//        getActionMap().put(key.hashCode(), new AbstractAction() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                System.out.println("pressed");
-//                if (isActive()) {
-//                    Main.push(new ExampleScene());
-//                    deactivate();
-//                } else {
-//                    Main.pop();
-//                    activate();
-//                }
-//            }
-//        });
+
+//        var helpButton = new JButton("Help");
+//        helpButton.setBackground(Color.GREEN);
+//        helpButton.setFont(new Font("Monospace", Font.PLAIN, 32));
+//        helpButton.setFocusable(false);
+//        helpButton.setBounds(0, 0, textWidth(helpButton.getFont(), helpButton.getText()) + 64, textHeight(helpButton.getFont(), helpButton.getText()));
+//        add(helpButton);
+
+        var key = KeyStroke.getKeyStroke(VK_SLASH, SHIFT_DOWN_MASK, false);
+        getInputMap(WHEN_IN_FOCUSED_WINDOW).put(key, key.hashCode());
+        getActionMap().put(key.hashCode(), new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (isActive()) {
+                    Main.push(new Help(), new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent actionEvent) {
+                            activate();
+                        }
+                    });
+                    deactivate();
+                }
+            }
+        });
     }
 
     @Override
     public void deactivate() {
         super.deactivate();
         animals.forEach(Animal::deactivate);
+        prey.deactivate();
     }
 
     @Override
     public void activate() {
         super.activate();
         animals.forEach(Animal::activate);
+        if (prey != null) prey.activate();
+        startTime = System.currentTimeMillis();
     }
 
     public static int rand(int range) {
@@ -90,9 +103,11 @@ public class Game extends Scene {
     public void update() {
         if (isActive()) {
             long now = System.currentTimeMillis();
-            long elapsed = now - startTime;
+            long deltaElapsed = now - startTime;
+            elapsed += deltaElapsed;
             double percent = (double) elapsed / levelMillis;
             int preypos = Math.min(finishLine, (int)((double) finishLine * percent));
+            startTime = now;
 
             prey.pos(preypos, prey.y);
 
@@ -112,7 +127,9 @@ public class Game extends Scene {
                     bw.newLine();
                     bw.close();
                 } catch (IOException e) {}
-                Main.push(new GameOver());
+                Main.push(new GameOver(), false);
+                deactivate();
+                return;
             }
 
             animals.sort((a, b) -> Long.compare(b.hoveredTime, a.hoveredTime));
@@ -132,6 +149,7 @@ public class Game extends Scene {
         }
         startTime = System.currentTimeMillis();
         animals.clear();
+        elapsed = 0;
 
         for (var type : Animal.Type.values()) {
             if (type.isPrey()) continue;
@@ -151,6 +169,8 @@ public class Game extends Scene {
 
         var preyList = Arrays.stream(Animal.Type.values()).filter(Animal.Type::isPrey).toList();
         prey = new Animal(preyList.get((int)(Math.random() * preyList.size())));
+        prey.draggable(false);
+        prey.hoverable(false);
         if (prey.height > Main.TRACK_HEIGHT) {
             prey.scale(200.0 / prey.height);
         }

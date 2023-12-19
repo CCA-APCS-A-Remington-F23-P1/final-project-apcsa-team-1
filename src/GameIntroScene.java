@@ -67,6 +67,12 @@ public class GameIntroScene extends Scene {
             case BUTTON_START:
                 Main.set(new Game());
                 break;
+            case BUTTON_HELP:
+                Main.push(new Help());
+                break;
+            case BUTTON_LEADERBOARD:
+                Main.push(new Leaderboard());
+                break;
         }
     }
 

@@ -1,10 +1,14 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.File;
+import java.nio.file.Paths;
 import java.util.Comparator;
 import java.util.Date;
 
 public class Leaderboard extends Scene {
+    private BufferedImage background = Main.loadImage(Paths.get("images", "forest-background.png"));
+
     public class Renderer extends JLabel implements ListCellRenderer<Score> {
         @Override
         public Component getListCellRendererComponent(JList<? extends Score> list, Score score, int index,
@@ -47,5 +51,12 @@ public class Leaderboard extends Scene {
         add(overlay);
 
         setOpaque(false);
+    }
+
+    @Override
+    public void paintComponent(Graphics frame) {
+        super.paintComponent(frame);
+
+        frame.drawImage(background, 0, 0, Main.WIDTH, Main.HEIGHT, null);
     }
 }

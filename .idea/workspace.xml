@@ -7,14 +7,13 @@
     <list default="true" id="dacc652d-80bc-44c7-80bc-abad51fa150d" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scores.csv" beforeDir="false" afterPath="$PROJECT_DIR$/scores.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Animal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Animal.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Game.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GameIntroScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameIntroScene.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GameOver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameOver.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Help.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Help.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Leaderboard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Leaderboard.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/NextLevel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/NextLevel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Score.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Score.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ScoreReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ScoreReader.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

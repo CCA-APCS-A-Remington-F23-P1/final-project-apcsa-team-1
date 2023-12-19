@@ -11,6 +11,8 @@ public class Animal extends Actor {
     private long timer;
     private int oldWidth;
     private int oldHeight;
+    private boolean isDraggable = true;
+    private boolean isHoverable = true;
 
     public Animal(Type type) {
         super();
@@ -39,7 +41,7 @@ public class Animal extends Actor {
 
             @Override
             public void mouseEntered(MouseEvent e) {
-                if (isActive()) {
+                if (isActive() && isHoverable) {
                     oldWidth = width;
                     oldHeight = height;
                     scale(1.3);
@@ -48,13 +50,23 @@ public class Animal extends Actor {
 
             @Override
             public void mouseExited(MouseEvent e) {
-                if (isActive()) {
+                if (isActive() && isHoverable) {
                     size(oldWidth, oldHeight);
                 }
             }
         };
         addMouseListener(mouse);
         addMouseMotionListener(mouse);
+    }
+
+    public Actor draggable(boolean state) {
+        this.isDraggable = state;
+        return this;
+    }
+
+    public Actor hoverable(boolean state) {
+        this.isHoverable = state;
+        return this;
     }
 
     @Override
@@ -72,7 +84,7 @@ public class Animal extends Actor {
         super.update();
 
         if (isActive()) {
-            if (pressed) {
+            if (pressed && isDraggable) {
                 Point screen = MouseInfo.getPointerInfo().getLocation();
                 Point target = new Point(screen.x - Main.window.getLocationOnScreen().x, screen.y - Main.window.getLocationOnScreen().y);
 

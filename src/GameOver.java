@@ -62,9 +62,11 @@ public class GameOver extends Scene {
         if (action != null) switch (action) {
             case BUTTON_ACTION_ONE:
                 Main.set(new Game());
+                Main.pop();
                 break;
             case BUTTON_ACTION_TWO:
                 Main.set(new GameIntroScene());
+                Main.pop();
                 break;
         }
     }

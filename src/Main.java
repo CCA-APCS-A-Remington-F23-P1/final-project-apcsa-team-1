@@ -19,12 +19,13 @@ public class Main {
     public static final int TRACK_HEIGHT = 200;
     public static final int MAIN_HEIGHT = HEIGHT - TRACK_HEIGHT;
     public static final int MAIN_WIDTH = WIDTH;
-    public static final int FRAMERATE = 30;
+    public static final int FRAMERATE = 15;
     public static final State state = State.RUNNING;
     public static JFrame window;
     public static Path IMAGE_DIR = Paths.get("images");
     public static Font BUTTON_FONT = new Font("MONOSPACE", Font.PLAIN, 64);
     public static final int DEFAULT_GAME_SECONDS = 10;
+    public static final String BUTTON_BACK = "=^.w.^=";
 
     private static Scene currentScene;
     private static final ArrayList<Scene> popups = new ArrayList<>();
@@ -56,24 +57,40 @@ public class Main {
     }
 
     public static void push(Scene scene) {
+        push(scene, true, null);
+    }
+
+    public static void push(Scene scene, boolean hasBack) {
+        push(scene, hasBack, null);
+    }
+
+    public static void push(Scene scene, ActionListener listener) {
+        push(scene, true, listener);
+    }
+
+    public static void push(Scene scene, boolean backButton, ActionListener listener) {
         popups.add(scene);
         layer.add(scene, POPUP_LAYER);
-
-        var button = new JButton("Back");
-        button.setOpaque(true);
-        button.setFont(BUTTON_FONT);
-        button.setBackground(Color.WHITE);
-        button.setForeground(Color.BLACK);
-        var width = scene.textWidth(BUTTON_FONT, button.getText()) + 64;
-        var height = scene.textHeight(BUTTON_FONT, button.getText());
-        button.setBounds(0, HEIGHT - height, width, height);
-        scene.add(button);
-        button.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                pop();
+        if (backButton) {
+            var button = new JButton("Back");
+            button.setOpaque(true);
+            button.setFont(BUTTON_FONT);
+            button.setBackground(Color.WHITE);
+            button.setForeground(Color.BLACK);
+            var width = scene.textWidth(BUTTON_FONT, button.getText()) + 64;
+            var height = scene.textHeight(BUTTON_FONT, button.getText());
+            button.setBounds(0, HEIGHT - height, width, height);
+            scene.add(button);
+            button.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent actionEvent) {
+                    pop();
+                }
+            });
+            if (listener != null) {
+                button.addActionListener(listener);
             }
-        });
+        }
     }
 
     public static void pop() {
