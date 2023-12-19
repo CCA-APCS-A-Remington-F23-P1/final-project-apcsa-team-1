@@ -23,7 +23,6 @@ public class GameIntroScene extends Scene {
             throw new RuntimeException(e);
         }
 
-        // setLayout(new FlowLayout());
         setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridwidth = GridBagConstraints.REMAINDER;

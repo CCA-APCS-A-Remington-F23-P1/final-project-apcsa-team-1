@@ -26,10 +26,10 @@ public class Game extends Scene {
     private long startTime = System.currentTimeMillis();
     private long elapsed;
     private long levelMillis;
-    private int round = 0;
     private double levelSeconds;
 
     public Animal prey;
+    public int round = 0;
 
     public Game() {
         levelSeconds = Main.DEFAULT_GAME_SECONDS;

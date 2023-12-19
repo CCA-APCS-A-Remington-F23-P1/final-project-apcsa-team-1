@@ -46,7 +46,10 @@ public class Help extends Scene {
     frame.drawString("Snake: Mouse, Rat, Squirrel", 50, 290);
     frame.drawString("Lion: Horse, Donkey, Zebra", 50, 320);
     frame.drawString("T-Rex: Triceratops, Pterodactyl, Brachiosaurus", 50, 350);
-    frame.drawImage(prey.images[0], 50, 500, prey.width, prey.height, null);
+
+    if (prey != null) {
+      frame.drawImage(prey.images[0], 50, 500, prey.width, prey.height, null);
+    }
   }
   
   @Override

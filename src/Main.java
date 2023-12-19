@@ -13,7 +13,6 @@ import java.util.stream.Stream;
 import static javax.swing.JLayeredPane.*;
 
 public class Main {
-    public static int score = 0;
     public static final int WIDTH = 1200;
     public static final int HEIGHT = 800;
     public static final int TRACK_HEIGHT = 200;

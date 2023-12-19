@@ -23,32 +23,37 @@ public class GameOver extends Scene {
     super();
 
     setOpaque(false);
+
+    setLayout(new GridBagLayout());
+    GridBagConstraints gbc = new GridBagConstraints();
+    gbc.gridwidth = GridBagConstraints.REMAINDER;
+    gbc.fill = GridBagConstraints.HORIZONTAL;
+
+    var game = (Game)Main.current();
+
+    JTextArea f = new JTextArea(16, 16);
+    f.setFont(new Font("Monospace", Font.PLAIN, 32));
+    f.setBackground(Color.GREEN);
+    f.setText(" GAME OVER\n" + " Score: " + game.round);
+    f.setEditable(false);
+    f.setAlignmentX(CENTER_ALIGNMENT);
+    add(f, gbc);
     
     reset.setActionCommand(BUTTON_ACTION_ONE);
     reset.addActionListener(this);
     reset.setText("Restart");
     reset.setFocusable(false);
     reset.setFont(Main.BUTTON_FONT);
-    reset.setForeground(Color.WHITE);
     reset.setBackground(Color.RED);
-    reset.setBounds(Main.WIDTH / 2, Main.HEIGHT / 2, textWidth(Main.BUTTON_FONT, reset.getText()) + 64, textHeight(Main.BUTTON_FONT, reset.getText()));
-    add(reset);
+    add(reset, gbc);
 
     menu.setActionCommand(BUTTON_ACTION_TWO);
     menu.addActionListener(this);
     menu.setText("Main Menu");
     menu.setFocusable(false);
     menu.setFont(Main.BUTTON_FONT);
-    menu.setForeground(Color.WHITE);
     menu.setBackground(Color.GREEN);
-    menu.setBounds(Main.WIDTH / 2, Main.HEIGHT / 2 + 100, textWidth(Main.BUTTON_FONT, menu.getText()) + 64, textHeight(Main.BUTTON_FONT, menu.getText()));
-    add(menu);
-
-    JTextArea f = new JTextArea(16, 16);
-    f.setText(" GAME OVER\n" + " Score: " + Main.score);
-    f.setEditable(false);
-    f.setBounds(0, 0, 200, 200);
-    add(f);
+    add(menu, gbc);
   }
   
   @Override
