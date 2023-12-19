@@ -5,8 +5,7 @@ import java.awt.event.ActionEvent;
 public class Help extends Scene {
   private static final String BUTTON_ACTION = "i was pressed";
   private Animal prey;
-  private Image preyImage;
-  
+
   public Help(){
     super();
     ImageIcon icon = new ImageIcon("images/helpButton.png");
@@ -29,8 +28,6 @@ public class Help extends Scene {
 
     if (Main.current() instanceof Game) {
       prey = ((Game) Main.current()).prey;
-      ImageIcon icon2 = new ImageIcon("images/" + prey.type.name().toLowerCase() + ".png");
-      preyImage = icon2.getImage();
     }
   }
 
@@ -49,7 +46,7 @@ public class Help extends Scene {
     frame.drawString("Snake: Mouse, Rat, Squirrel", 50, 290);
     frame.drawString("Lion: Horse, Donkey, Zebra", 50, 320);
     frame.drawString("T-Rex: Triceratops, Pterodactyl, Brachiosaurus", 50, 350);
-    frame.drawImage(preyImage, 50, 500, null);
+    frame.drawImage(prey.images[0], 50, 500, prey.width, prey.height, null);
   }
   
   @Override

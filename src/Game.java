@@ -88,6 +88,10 @@ public class Game extends Scene {
         return (int) (Math.random() * (double)range);
     }
 
+    public Animal getPrey() {
+        return prey;
+    }
+
     @Override
     public void paintComponent(Graphics frame) {
         super.paintComponent(frame);
