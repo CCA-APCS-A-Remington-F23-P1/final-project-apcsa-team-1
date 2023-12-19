@@ -35,7 +35,7 @@ public class Help extends Scene {
   public void paintComponent(Graphics frame) {
     super.paintComponent(frame);
 
-    frame.drawString("Rules: ", 50, 50);
+    frame.drawString("Rules (Press the ? on your keyboard to access this in game): ", 50, 50);
     frame.drawString("You have to stop the prey before it reaches the treasure. In order to do this you need to select the appropriate predator in time.", 50, 80);
     frame.drawString("List of predators and their corresponding prey:", 50, 110);
     frame.drawString("Eagle: Duck, Parrot, Toucan", 50, 140);
