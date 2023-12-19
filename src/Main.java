@@ -10,7 +10,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.stream.Stream;
-
 import static javax.swing.JLayeredPane.*;
 
 public class Main {
@@ -58,7 +57,23 @@ public class Main {
 
     public static void push(Scene scene) {
         popups.add(scene);
-        layer.add(scene, 0);
+        layer.add(scene, POPUP_LAYER);
+
+        var button = new JButton("Back");
+        button.setOpaque(true);
+        button.setFont(BUTTON_FONT);
+        button.setBackground(Color.WHITE);
+        button.setForeground(Color.BLACK);
+        var width = scene.textWidth(BUTTON_FONT, button.getText()) + 64;
+        var height = scene.textHeight(BUTTON_FONT, button.getText());
+        button.setBounds(0, HEIGHT - height, width, height);
+        scene.add(button);
+        button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                pop();
+            }
+        });
     }
 
     public static void pop() {
@@ -95,8 +110,8 @@ public class Main {
         layer.setBounds(0, 0, WIDTH, HEIGHT);
         window.add(layer);
 
-        set(new Game(DEFAULT_GAME_SECONDS));
-        set(new Leaderboard());
+        set(new GameIntroScene());
+        // push(new Leaderboard());
 
         // don't allow the user to resize the window
         window.setResizable(false);

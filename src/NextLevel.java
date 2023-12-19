@@ -39,7 +39,7 @@ public class NextLevel extends Scene {
         if (action != null) switch(action) {
             case NEXT_LEVEL: {
                 Game game = (Game)Main.current();
-                Main.set(new Game(game.levelSeconds - .5));
+                game.nextRound();
                 Main.pop();
                 break;
             }

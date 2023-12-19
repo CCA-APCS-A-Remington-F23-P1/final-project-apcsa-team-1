@@ -5,6 +5,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -23,12 +26,12 @@ public class Game extends Scene {
     private int finishLine;
     private long startTime = System.currentTimeMillis();
     private long levelMillis;
+    private int round = 0;
+    private double levelSeconds;
 
-    public double levelSeconds;
-
-    public Game(double seconds) {
-        levelSeconds = seconds;
-        levelMillis = (long)(seconds * 1000.0);
+    public Game() {
+        levelSeconds = Main.DEFAULT_GAME_SECONDS;
+        levelMillis = (long)(levelSeconds * 1000);
 
         // set the game board size
         setPreferredSize(new Dimension(Main.WIDTH, Main.HEIGHT));
@@ -37,36 +40,7 @@ public class Game extends Scene {
         setLayout(null);
         setBounds(0, 0, Main.WIDTH, Main.HEIGHT);
 
-        for (var type : Animal.Type.values()) {
-            if (type.isPrey()) continue;
-
-            var animal = new Animal(type);
-            if (animal.height > 150) {
-                animal.scale(150.0 / animal.height);
-            }
-            animal.pos(rand(Main.MAIN_WIDTH), rand(Main.MAIN_HEIGHT - 300));
-            animal.animationRate(400);
-            animal.setVisible(false);
-            animals.add(animal);
-            add(animal);
-        }
-
-        animals.forEach(animal -> animal.setVisible(true));
-
-        var preyList = Arrays.stream(Animal.Type.values()).filter(Animal.Type::isPrey).toList();
-        prey = new Animal(preyList.get((int)(Math.random() * preyList.size())));
-        if (prey.height > Main.TRACK_HEIGHT) {
-            prey.scale(200.0 / prey.height);
-        }
-        prey.pos(0, Main.HEIGHT - Main.TRACK_HEIGHT / 2 - prey.height / 2);
-        add(prey);
-
-        if (treasure.height > Main.TRACK_HEIGHT) {
-            treasure.scale(200.0 / treasure.height);
-        }
-        treasure.pos(Main.WIDTH - treasure.width, Main.HEIGHT - treasure.height);
-        add(treasure);
-        finishLine = treasure.x + treasure.width / 2 - prey.width;
+        reset();
 //
 //        var key = KeyStroke.getKeyStroke(VK_ESCAPE, 0, false);
 //        getInputMap(WHEN_IN_FOCUSED_WINDOW).put(key, key.hashCode());
@@ -98,14 +72,7 @@ public class Game extends Scene {
     }
 
     public static int rand(int range) {
-        return (int) (Math.random() * range);
-    }
-
-    public static void centeredText(Graphics frame, String text, Rectangle rect) {
-        var metrics = frame.getFontMetrics(frame.getFont());
-        int x = rect.x + (rect.width - metrics.stringWidth(text)) / 2;
-        int y = rect.y + ((rect.height - metrics.getHeight()) / 2) + metrics.getAscent();
-        frame.drawString(text, x, y);
+        return (int) (Math.random() * (double)range);
     }
 
     @Override
@@ -113,6 +80,11 @@ public class Game extends Scene {
         super.paintComponent(frame);
 
         frame.drawImage(BACKGROUND, 0, 0, Main.WIDTH, Main.HEIGHT, null);
+    }
+
+    public void nextRound() {
+        round += 1;
+        reset();
     }
 
     public void update() {
@@ -133,6 +105,13 @@ public class Game extends Scene {
             }
 
             if (prey.isColliding(treasure)) {
+                try {
+                    FileWriter fw = new FileWriter("scores.csv", true);
+                    BufferedWriter bw = new BufferedWriter(fw);
+                    bw.write(new Score(round, 0, System.currentTimeMillis() / 1000L).serialize());
+                    bw.newLine();
+                    bw.close();
+                } catch (IOException e) {}
                 Main.push(new GameOver());
             }
 
@@ -143,5 +122,46 @@ public class Game extends Scene {
             prey.update();
             treasure.update();
         }
+    }
+
+    public void reset() {
+        activate();
+
+        for (var component : getComponents()) {
+            remove(component);
+        }
+        startTime = System.currentTimeMillis();
+        animals.clear();
+
+        for (var type : Animal.Type.values()) {
+            if (type.isPrey()) continue;
+
+            var animal = new Animal(type);
+            if (animal.height > 150) {
+                animal.scale(150.0 / animal.height);
+            }
+            animal.pos(rand(Main.MAIN_WIDTH), rand(Main.MAIN_HEIGHT - animal.height));
+            animal.animationRate(400);
+            animal.setVisible(false);
+            animals.add(animal);
+            add(animal);
+        }
+
+        animals.forEach(animal -> animal.setVisible(true));
+
+        var preyList = Arrays.stream(Animal.Type.values()).filter(Animal.Type::isPrey).toList();
+        prey = new Animal(preyList.get((int)(Math.random() * preyList.size())));
+        if (prey.height > Main.TRACK_HEIGHT) {
+            prey.scale(200.0 / prey.height);
+        }
+        prey.pos(0, Main.HEIGHT - Main.TRACK_HEIGHT / 2 - prey.height / 2);
+        add(prey);
+
+        if (treasure.height > Main.TRACK_HEIGHT) {
+            treasure.scale(200.0 / treasure.height);
+        }
+        treasure.pos(Main.WIDTH - treasure.width, Main.HEIGHT - treasure.height);
+        add(treasure);
+        finishLine = treasure.x + treasure.width / 2 - prey.width;
     }
 }

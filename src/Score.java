@@ -1,34 +1,22 @@
+import java.util.Date;
+
 public class Score {
-    String playerName;
-    int highestLevel;
-    int highestScore;
-    int currentGameScore;
+    public int timeTaken;
+    public int highestRound;
+    public long unixTime;
 
-    public Score(String playerName, int highestLevel, int highestScore) {
-        this.playerName = playerName;
-        this.highestLevel = highestLevel;
-        this.highestScore = highestScore;
-        this.currentGameScore = 0;
+    public Score(int highestRound, int timeTaken, long unixTime) {
+        this.highestRound = highestRound;
+        this.timeTaken = timeTaken;
+        this.unixTime = unixTime;
     }
 
-    public String getPlayerName() {
-        return playerName;
+    public String serialize() {
+        return String.format("%d,%d,%d", highestRound, timeTaken, unixTime);
     }
 
-    public void setPlayerName(String playerName) {
-        this.playerName = playerName;
-    }
-
-    public int getCurrentGameScore() {
-        return this.currentGameScore;
-    }
-
-    public void setCurrentGameScore(int currentGameScore) {
-        this.currentGameScore = currentGameScore;
-    }
-
-    @Override
-    public String toString() {
-        return "Player: " + playerName + " Highest Level: " + highestLevel + " Highest Score: " + highestScore;
+    public static Score deserialize(String data) {
+        String[] tokens = data.split(",");
+        return new Score(Integer.parseInt(tokens[0]), Integer.parseInt(tokens[1]), Long.parseLong(tokens[2]));
     }
 }

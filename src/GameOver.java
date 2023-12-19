@@ -44,36 +44,16 @@ public class GameOver extends Scene {
     menu.setBounds(Main.WIDTH / 2, Main.HEIGHT / 2 + 100, textWidth(Main.BUTTON_FONT, menu.getText()) + 64, textHeight(Main.BUTTON_FONT, menu.getText()));
     add(menu);
 
-    text.setEditable(false);
-    text.setText("HELLO THERE");
-    text.setBounds(0, 0, 500, 500);
-    add(text);
-
-    JFrame window = new JFrame("Testing, testing...");
-
-    window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    window.setPreferredSize(new Dimension(400, 400));
-    window.setLayout(null);
-
     JTextArea f = new JTextArea(16, 16);
     f.setText(" GAME OVER\n" + " Score: " + Main.score);
     f.setEditable(false);
     f.setBounds(0, 0, 200, 200);
-    window.add(f);
-
-    window.setResizable(false);
-
-    window.pack();
-
-    window.setLocationRelativeTo(null);
-
-    window.setVisible(true);
-    window.createBufferStrategy(2);
+    add(f);
   }
   
   @Override
   public void paintComponent(Graphics frame) {
-        super.paintComponent(frame);
+    super.paintComponent(frame);
   }
 
     @Override
@@ -81,10 +61,10 @@ public class GameOver extends Scene {
         var action = e.getActionCommand();
         if (action != null) switch (action) {
             case BUTTON_ACTION_ONE:
-                Main.set(new Game(Main.DEFAULT_GAME_SECONDS));
+                Main.set(new Game());
                 break;
             case BUTTON_ACTION_TWO:
-                Main.set(new GameIntroScene(null));
+                Main.set(new GameIntroScene());
                 break;
         }
     }
