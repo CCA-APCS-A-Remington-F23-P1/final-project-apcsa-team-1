@@ -93,6 +93,10 @@ public class Game extends Scene {
         return (int) (Math.random() * range);
     }
 
+    public Animal getPrey() {
+      return prey;
+    }
+
     public static void centeredText(Graphics frame, String text, Rectangle rect) {
         var metrics = frame.getFontMetrics(frame.getFont());
         int x = rect.x + (rect.width - metrics.stringWidth(text)) / 2;
