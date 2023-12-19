@@ -69,6 +69,8 @@ public class GameOver extends Scene {
     f.setText(" GAME OVER\n" + " Score: " + Main.score);
     f.setEditable(false);
     f.setBounds(0, 0, 200, 200);
+    f.setForeground(Color.RED);
+    f.setBackground(Color.BLACK);
     window.add(f);
 
     window.setResizable(false);
