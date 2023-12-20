@@ -31,6 +31,7 @@ public class Game extends Scene {
     private long startTime = System.currentTimeMillis();
     private long elapsed;
     private Point velocity;
+    private static int WTF_IS_GOING_ON_ROUND = 16;
 
     public Game() {
         levelSeconds = Main.DEFAULT_GAME_SECONDS;
@@ -67,8 +68,17 @@ public class Game extends Scene {
         return (int) (Math.random() * (double) range);
     }
 
-    private Point randomVelocity() {
-        return new Point((int)(Math.random() * 20) - 10, (int)(Math.random() * 20) - 10);
+    private int randomSign() {
+        return Math.random() >= 0.5 ? -1 : 1;
+    }
+
+    private Point randomVelocity(int amount) {
+        int rx = (int)(Math.random() * amount);
+        int ry = (int)(Math.random() * amount);
+        int half = (int)Math.ceil((double)amount / 2.0);
+        rx = Math.max(rx, half);
+        ry = Math.max(ry, half);
+        return new Point(amount * randomSign(), amount * randomSign());
     }
 
     @Override
@@ -115,6 +125,10 @@ public class Game extends Scene {
             levelMillis = Math.max(1500, levelMillis - 500);
         }
 
+        if (round > WTF_IS_GOING_ON_ROUND) {
+            velocity = randomVelocity(round - 16);
+        }
+
         reset(shuffle, crazy);
     }
 
@@ -159,9 +173,8 @@ public class Game extends Scene {
             prey.update();
             treasure.update();
 
-            {
+            if (round > WTF_IS_GOING_ON_ROUND) {
                 var pos = Main.window.getLocationOnScreen();
-                System.out.println(pos);
                 var width = Main.window.getWidth();
                 var height = Main.window.getHeight();
                 var npos = new Point(pos.x + velocity.x, pos.y + velocity.y);
@@ -187,7 +200,6 @@ public class Game extends Scene {
 
         startTime = System.currentTimeMillis();
         elapsed = 0;
-        velocity = randomVelocity();
 
         if (animals.isEmpty()) {
             for (var type : Animal.Type.values()) {

@@ -130,7 +130,7 @@ public class Main {
             var rect = defaultScreen.getDefaultConfiguration().getBounds();
 
             screenMinX = dyn.getLocationOnScreen().x;
-            screenMinY = dyn.getLocationOnScreen().y;
+            screenMinY = dyn.getLocationOnScreen().y + 20;
             screenMaxX = (int) rect.getMaxX();
             screenMaxY = (int) rect.getMaxY();
 
