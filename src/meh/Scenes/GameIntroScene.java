@@ -26,6 +26,7 @@ public class GameIntroScene extends Box {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+
         // start the game
         var startButton = new JButton("Start game");
         startButton.setBackground(Color.GREEN);
@@ -76,14 +77,14 @@ public class GameIntroScene extends Box {
             }
     }
 
-    private void playBackground() throws IOException, UnsupportedAudioFileException, LineUnavailableException {
-        File musicPath = new File("arcade-bgm.wav");
-        if (musicPath.exists()) {
-            AudioInputStream audioInput = AudioSystem.getAudioInputStream(musicPath);
-            Clip clip = AudioSystem.getClip();
-            clip.open(audioInput);
-            clip.loop(100);
-            clip.start();
-        }
-    }
+//    private void playBackground() throws IOException, UnsupportedAudioFileException, LineUnavailableException {
+//        File musicPath = new File("arcade-bgm.wav");
+//        if (musicPath.exists()) {
+//            AudioInputStream audioInput = AudioSystem.getAudioInputStream(musicPath);
+//            Clip clip = AudioSystem.getClip();
+//            clip.open(audioInput);
+//            clip.loop(100);
+//            clip.start();
+//        }
+//    }
 }
