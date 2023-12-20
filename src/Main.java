@@ -10,7 +10,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.stream.Stream;
-import static javax.swing.JLayeredPane.*;
+
+import static javax.swing.JLayeredPane.POPUP_LAYER;
 
 public class Main {
     public static final int WIDTH = 1200;
@@ -20,14 +21,13 @@ public class Main {
     public static final int MAIN_WIDTH = WIDTH;
     public static final int FRAMERATE = 15;
     public static final State state = State.RUNNING;
+    public static final int DEFAULT_GAME_SECONDS = 10;
+    public static final String BUTTON_BACK = "=^.w.^=";
+    private static final ArrayList<Scene> popups = new ArrayList<>();
     public static JFrame window;
     public static Path IMAGE_DIR = Paths.get("images");
     public static Font BUTTON_FONT = new Font("MONOSPACE", Font.PLAIN, 64);
-    public static final int DEFAULT_GAME_SECONDS = 10;
-    public static final String BUTTON_BACK = "=^.w.^=";
-
     private static Scene currentScene;
-    private static final ArrayList<Scene> popups = new ArrayList<>();
     private static JLayeredPane layer;
 
     public static void main(String[] args) {
@@ -38,7 +38,7 @@ public class Main {
         try {
             return ImageIO.read(path.toFile());
         } catch (IOException e) {
-            System.out.printf("[+] WARNING: failed to load image %s\n", path.toAbsolutePath().toString());
+            System.out.printf("[+] WARNING: failed to load image %s\n", path.toAbsolutePath());
         }
         return null;
     }
@@ -51,7 +51,7 @@ public class Main {
                     .map(f -> Main.loadImage(f.toPath()))
                     .toArray(BufferedImage[]::new);
         } else {
-            return new BufferedImage[]{ Main.loadImage(file.toPath()) };
+            return new BufferedImage[]{Main.loadImage(file.toPath())};
         }
     }
 

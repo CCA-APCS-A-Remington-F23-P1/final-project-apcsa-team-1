@@ -1,54 +1,54 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.nio.file.Paths;
-import java.util.Comparator;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class Leaderboard extends Scene {
-    private BufferedImage background = Main.loadImage(Paths.get("images", "forest-background.png"));
-
-    public class Renderer extends JLabel implements ListCellRenderer<Score> {
-        @Override
-        public Component getListCellRendererComponent(JList<? extends Score> list, Score score, int index,
-                                                      boolean isSelected, boolean cellHasFocus) {
-            var msg = String.format("On %s, %d rounds were passed in %d seconds.", new Date(score.unixTime * 1000).toString(), score.highestRound, score.timeTaken);
-            setText(msg);
-            setFont(new Font("Monospace", Font.PLAIN, 24));
-            var border = BorderFactory.createCompoundBorder(BorderFactory.createLineBorder(Color.BLACK), BorderFactory.createEmptyBorder(10, 10, 10, 10));
-            setBorder(border);
-
-            return this;
-        }
-    }
+public class Leaderboard extends Box {
+    private final BufferedImage background = Main.loadImage(Paths.get("images", "forest-background.png"));
 
     public Leaderboard() {
         super();
 
-        var overlay = new Scene();
-
-        overlay.setLayout(new BoxLayout(overlay, BoxLayout.Y_AXIS));
-        overlay.setOpaque(false);
-
-        var scores = ScoreReader.readScore("scores.csv");
-        scores.sort(Comparator.comparingInt(a -> a.highestRound));
+        var scores = ScoreReader.readScore();
+        scores.sort((a, b) -> Integer.compare(b.highestRound, a.highestRound));
 
         var label = new JLabel("Leaderboard");
-        label.setHorizontalAlignment(JLabel.CENTER);
         label.setForeground(Color.BLACK);
         label.setBackground(Color.WHITE);
         label.setFont(new Font("Monospace", Font.PLAIN, 64));
         label.setOpaque(true);
-        overlay.add(label);
+        {
+            var gbc = new GridBagConstraints();
+            gbc.gridwidth = GridBagConstraints.REMAINDER;
+            add(label, gbc);
+        }
 
-        var list = new JList(scores.toArray());
-        list.setCellRenderer(new Renderer());
-        list.setSelectionBackground(Color.RED);
-        overlay.add(list);
+        if (!scores.isEmpty()) {
+            var list = new JList<>(scores.toArray(Score[]::new));
+            list.setCellRenderer(new Renderer());
+            list.setSelectionBackground(Color.RED);
+            list.setLayoutOrientation(JList.VERTICAL);
 
-        overlay.setBounds(0, 0, Main.WIDTH, Main.HEIGHT);
-        add(overlay);
+            JScrollPane scrollPane = new JScrollPane();
+            scrollPane.setViewportView(list);
+            scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+            {
+                var gbc = new GridBagConstraints();
+                gbc.gridwidth = GridBagConstraints.REMAINDER;
+                gbc.weighty = 1.0;
+                add(scrollPane, gbc);
+            }
+        } else {
+            var filler = new JPanel();
+            filler.setOpaque(false);
+            {
+                var gbc = new GridBagConstraints();
+                gbc.weighty = 1.0;
+                add(filler, gbc);
+            }
+        }
 
         setOpaque(false);
     }
@@ -58,5 +58,23 @@ public class Leaderboard extends Scene {
         super.paintComponent(frame);
 
         frame.drawImage(background, 0, 0, Main.WIDTH, Main.HEIGHT, null);
+    }
+
+    public class Renderer extends JLabel implements ListCellRenderer<Score> {
+        @Override
+        public Component getListCellRendererComponent(JList<? extends Score> list, Score score, int index,
+                                                      boolean isSelected, boolean cellHasFocus) {
+            Date date = new Date(score.unixTime * 1000);
+            String pattern = "MM-dd-yyyy";
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+
+            var msg = String.format("On %s, %d rounds were passed in %.1f seconds.", simpleDateFormat.format(date), score.highestRound, (double) score.timeTaken / 1000.0);
+            setText(msg);
+            setFont(new Font("Monospace", Font.PLAIN, 24));
+            var border = BorderFactory.createCompoundBorder(BorderFactory.createLineBorder(Color.BLACK), BorderFactory.createEmptyBorder(10, 10, 10, 10));
+            setBorder(border);
+
+            return this;
+        }
     }
 }

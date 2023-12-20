@@ -1,13 +1,7 @@
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.Arrays;
-import java.util.stream.Stream;
 
 public class Actor extends JLabel {
     public BufferedImage[] images;
@@ -16,7 +10,7 @@ public class Actor extends JLabel {
     public int x;
     public int y;
     public boolean flip = false;
-    private int animationFrame = 0;
+    public int animationFrame = 0;
     private int animationRate = 100;
     private long animationTimer = System.currentTimeMillis();
     private boolean rebound = true;
@@ -58,7 +52,7 @@ public class Actor extends JLabel {
     }
 
     public Actor scale(double newScale) {
-        size((int)(width * newScale), (int)(height * newScale));
+        size((int) (width * newScale), (int) (height * newScale));
         return this;
     }
 
@@ -134,10 +128,18 @@ public class Actor extends JLabel {
      */
     public void translate(Direction direction, int amount) {
         switch (direction) {
-            case UP: this.y -= amount; break;
-            case DOWN: this.y += amount; break;
-            case LEFT: this.x -= amount; break;
-            case RIGHT: this.x += amount; break;
+            case UP:
+                this.y -= amount;
+                break;
+            case DOWN:
+                this.y += amount;
+                break;
+            case LEFT:
+                this.x -= amount;
+                break;
+            case RIGHT:
+                this.x += amount;
+                break;
         }
         pos(x, y);
     }

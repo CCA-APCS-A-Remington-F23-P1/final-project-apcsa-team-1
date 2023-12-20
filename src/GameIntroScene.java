@@ -1,5 +1,6 @@
 import javax.imageio.ImageIO;
-import javax.sound.sampled.*;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -7,12 +8,12 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
-public class GameIntroScene extends Scene {
-    private final BufferedImage backgroundImage;
-    private final int count = 0;
+public class GameIntroScene extends Box {
     private static final String BUTTON_START = ":3";
     private static final String BUTTON_HELP = "^w^";
     private static final String BUTTON_LEADERBOARD = ":P";
+    private final BufferedImage backgroundImage;
+    private final int count = 0;
 
     public GameIntroScene() {
         System.out.println("Game Intro scene is created...");
@@ -23,18 +24,13 @@ public class GameIntroScene extends Scene {
             throw new RuntimeException(e);
         }
 
-        setLayout(new GridBagLayout());
-        GridBagConstraints gbc = new GridBagConstraints();
-        gbc.gridwidth = GridBagConstraints.REMAINDER;
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-
         var startButton = new JButton("Start game");
         startButton.setBackground(Color.GREEN);
         startButton.setActionCommand(BUTTON_START);
         startButton.setFont(Main.BUTTON_FONT);
         startButton.setFocusable(false);
         startButton.addActionListener(this);
-        add(startButton, gbc);
+        add(startButton, centerConstraints());
 
         var helpButton = new JButton("Help");
         helpButton.setBackground(Color.GREEN);
@@ -42,7 +38,7 @@ public class GameIntroScene extends Scene {
         helpButton.setFont(Main.BUTTON_FONT);
         helpButton.setFocusable(false);
         helpButton.addActionListener(this);
-        add(helpButton, gbc);
+        add(helpButton, centerConstraints());
 
         var leaderboardButton = new JButton("Leaderboard");
         leaderboardButton.setBackground(Color.GREEN);
@@ -50,7 +46,7 @@ public class GameIntroScene extends Scene {
         leaderboardButton.setFont(Main.BUTTON_FONT);
         leaderboardButton.setFocusable(false);
         leaderboardButton.addActionListener(this);
-        add(leaderboardButton, gbc);
+        add(leaderboardButton, centerConstraints());
     }
 
     @Override
@@ -76,13 +72,13 @@ public class GameIntroScene extends Scene {
     }
 
     private void playBackground() throws IOException, UnsupportedAudioFileException, LineUnavailableException {
-        File musicPath = new File("arcade-bgm.wav");
-        if (musicPath.exists()) {
-            AudioInputStream audioInput = AudioSystem.getAudioInputStream(musicPath);
-            Clip clip = AudioSystem.getClip();
-            clip.open(audioInput);
-            clip.loop(100);
-            clip.start();
-        }
+//        File musicPath = new File("arcade-bgm.wav");
+//        if (musicPath.exists()) {
+//            AudioInputStream audioInput = AudioSystem.getAudioInputStream(musicPath);
+//            Clip clip = AudioSystem.getClip();
+//            clip.open(audioInput);
+//            clip.loop(100);
+//            clip.start();
+//        }
     }
 }

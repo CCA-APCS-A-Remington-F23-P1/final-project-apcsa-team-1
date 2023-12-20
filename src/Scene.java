@@ -1,19 +1,16 @@
 import javax.swing.*;
+import javax.swing.border.CompoundBorder;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
 
 public class Scene extends JPanel implements ActionListener {
     private boolean active = true;
 
     public Scene() {
         setPreferredSize(new Dimension(Main.WIDTH, Main.HEIGHT));
-        setLayout(null); 
+        setLayout(null);
         setBounds(0, 0, Main.WIDTH, Main.HEIGHT);
     }
 
@@ -29,9 +26,11 @@ public class Scene extends JPanel implements ActionListener {
         active = false;
     }
 
-    public void update() {}
+    public void update() {
+    }
 
-    public void reset() {}
+    public void reset() {
+    }
 
     public int textWidth(Font f, String msg) {
         var metrics = getFontMetrics(f);
@@ -43,9 +42,12 @@ public class Scene extends JPanel implements ActionListener {
         return metrics.getHeight();
     }
 
+    public void pad(JComponent victim, Insets insets) {
+        victim.setBorder(new CompoundBorder(victim.getBorder(), new EmptyBorder(insets)));
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
-
     }
 
     @Override
