@@ -24,3 +24,4 @@ Defines a basic enum for the four cardinal directions UP, DOWN, LEFT, RIGHT.
 
 ### images
 Image files for actors, game backgrounds, icons, etc.
+
