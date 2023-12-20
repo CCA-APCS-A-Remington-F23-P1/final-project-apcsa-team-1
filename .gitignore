@@ -1,0 +1,10 @@
+key.bin
+**/*.class
+build/
+out/
+csa-project.iml
+target/
+**/*.tar
+.cache/
+.upm/
+.breakpoints
