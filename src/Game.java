@@ -92,6 +92,14 @@ public class Game extends Scene {
         return prey;
     }
 
+    public long getlevelMillis() {
+      return levelMillis;
+    }
+
+    public long getElapsed() {
+      return elapsed;
+    }
+
     @Override
     public void paintComponent(Graphics frame) {
         super.paintComponent(frame);
