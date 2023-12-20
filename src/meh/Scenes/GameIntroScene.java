@@ -26,7 +26,7 @@ public class GameIntroScene extends Box {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-
+        // start the game
         var startButton = new JButton("Start game");
         startButton.setBackground(Color.GREEN);
         startButton.setActionCommand(BUTTON_START);
@@ -34,7 +34,7 @@ public class GameIntroScene extends Box {
         startButton.setFocusable(false);
         startButton.addActionListener(this);
         add(startButton, centerConstraints());
-
+        // help button
         var helpButton = new JButton("Help");
         helpButton.setBackground(Color.GREEN);
         helpButton.setActionCommand(BUTTON_HELP);
@@ -43,6 +43,7 @@ public class GameIntroScene extends Box {
         helpButton.addActionListener(this);
         add(helpButton, centerConstraints());
 
+        //leaderboard button
         var leaderboardButton = new JButton("Leaderboard");
         leaderboardButton.setBackground(Color.GREEN);
         leaderboardButton.setActionCommand(BUTTON_LEADERBOARD);
@@ -61,27 +62,28 @@ public class GameIntroScene extends Box {
     @Override
     public void actionPerformed(ActionEvent e) {
         var action = e.getActionCommand();
-        if (action != null) switch (action) {
-            case BUTTON_START:
-                Main.set(new Game());
-                break;
-            case BUTTON_HELP:
-                Main.push(new Help());
-                break;
-            case BUTTON_LEADERBOARD:
-                Main.push(new Leaderboard());
-                break;
-        }
+        if (action != null)
+            switch (action) {
+                case BUTTON_START:
+                    Main.set(new Game());
+                    break;
+                case BUTTON_HELP:
+                    Main.push(new Help());
+                    break;
+                case BUTTON_LEADERBOARD:
+                    Main.push(new Leaderboard());
+                    break;
+            }
     }
 
     private void playBackground() throws IOException, UnsupportedAudioFileException, LineUnavailableException {
-//        File musicPath = new File("arcade-bgm.wav");
-//        if (musicPath.exists()) {
-//            AudioInputStream audioInput = AudioSystem.getAudioInputStream(musicPath);
-//            Clip clip = AudioSystem.getClip();
-//            clip.open(audioInput);
-//            clip.loop(100);
-//            clip.start();
-//        }
+        File musicPath = new File("arcade-bgm.wav");
+        if (musicPath.exists()) {
+            AudioInputStream audioInput = AudioSystem.getAudioInputStream(musicPath);
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioInput);
+            clip.loop(100);
+            clip.start();
+        }
     }
 }
