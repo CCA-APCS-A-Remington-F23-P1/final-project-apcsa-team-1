@@ -20,9 +20,7 @@ public class Main {
     public static final int MAIN_HEIGHT = HEIGHT - TRACK_HEIGHT;
     public static final int MAIN_WIDTH = WIDTH;
     public static final int FRAMERATE = 15;
-    public static final State state = State.RUNNING;
     public static final int DEFAULT_GAME_SECONDS = 10;
-    public static final String BUTTON_BACK = "=^.w.^=";
     private static final ArrayList<Scene> popups = new ArrayList<>();
     public static JFrame window;
     public static Path IMAGE_DIR = Paths.get("images");

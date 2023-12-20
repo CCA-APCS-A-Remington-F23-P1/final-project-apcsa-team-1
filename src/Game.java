@@ -18,7 +18,7 @@ public class Game extends Scene {
     private final static BufferedImage BACKGROUND = Main.loadImage(Paths.get("images", "forest-background.png"));
     private final Actor treasure = new Actor().frames(Paths.get("treasurechest.png"));
     private final ArrayList<Animal> animals = new ArrayList<>();
-    private final long levelMillis;
+    private long levelMillis;
     private final double levelSeconds;
     public Animal prey;
     public int round = 0;
@@ -38,14 +38,7 @@ public class Game extends Scene {
         setLayout(null);
         setBounds(0, 0, Main.WIDTH, Main.HEIGHT);
 
-        reset();
-
-//        var helpButton = new JButton("Help");
-//        helpButton.setBackground(Color.GREEN);
-//        helpButton.setFont(new Font("Monospace", Font.PLAIN, 32));
-//        helpButton.setFocusable(false);
-//        helpButton.setBounds(0, 0, textWidth(helpButton.getFont(), helpButton.getText()) + 64, textHeight(helpButton.getFont(), helpButton.getText()));
-//        add(helpButton);
+        reset(true);
 
         var key = KeyStroke.getKeyStroke(VK_SLASH, SHIFT_DOWN_MASK, false);
         getInputMap(WHEN_IN_FOCUSED_WINDOW).put(key, key.hashCode());
@@ -105,7 +98,14 @@ public class Game extends Scene {
 
     public void nextRound() {
         round += 1;
-        reset();
+
+        boolean speedUp = Math.random() >= 0.5;
+        boolean shuffle = Math.random() >= 0.7;
+        if (speedUp) {
+            levelMillis = Math.max(1500, levelMillis - 500);
+        }
+
+        reset(shuffle);
     }
 
     public void update() {
@@ -151,28 +151,38 @@ public class Game extends Scene {
         }
     }
 
-    public void reset() {
+    public void reset(boolean shuffle) {
         activate();
 
         for (var component : getComponents()) {
-            remove(component);
+            if (!animals.contains(component)) {
+                remove(component);
+            }
         }
+
         startTime = System.currentTimeMillis();
-        animals.clear();
         elapsed = 0;
 
-        for (var type : Animal.Type.values()) {
-            if (type.isPrey()) continue;
+        if (animals.isEmpty()) {
+            for (var type : Animal.Type.values()) {
+                if (type.isPrey()) continue;
 
-            var animal = new Animal(type);
+                var animal = new Animal(type);
+                animal.animationRate(400);
+                animal.setVisible(false);
+                animals.add(animal);
+                add(animal);
+            }
+        }
+
+        animals.forEach(animal -> {
             if (animal.height > 150) {
                 animal.scale(150.0 / animal.height);
             }
-            animal.pos(rand(Main.MAIN_WIDTH), rand(Main.MAIN_HEIGHT - animal.height));
-            animal.animationRate(400);
-            animal.setVisible(false);
-            animals.add(animal);
-            add(animal);
+        });
+
+        if (shuffle) {
+            animals.forEach(animal -> animal.pos(rand(Main.MAIN_WIDTH), rand(Main.MAIN_HEIGHT - animal.height)));
         }
 
         animals.forEach(animal -> animal.setVisible(true));
