@@ -10,7 +10,7 @@ $(OUTPUT_FILES): $(SOURCE_FILES)
 	echo "[+] Done compiling"
 
 run: $(OUTPUT_FILES)
-	java -cp $(BUILD_DIR) Main
+	java -cp $(BUILD_DIR) meh.Main
 
 package: clean
 	tar -czf build/package.tar --exclude=build ./*

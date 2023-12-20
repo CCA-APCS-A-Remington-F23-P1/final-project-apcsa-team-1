@@ -1,3 +1,6 @@
+package meh.Scenes;
+
+import meh.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;

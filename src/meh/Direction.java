@@ -1,3 +1,5 @@
+package meh;
+
 public enum Direction {
     UP,
     DOWN,

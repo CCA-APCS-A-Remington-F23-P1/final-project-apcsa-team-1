@@ -5,13 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dacc652d-80bc-44c7-80bc-abad51fa150d" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scores.csv" beforeDir="false" afterPath="$PROJECT_DIR$/scores.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ExampleScene.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Game.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Box.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/meh/Scenes/Box.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/meh/Scenes/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GameIntroScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/meh/Scenes/GameIntroScene.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GameOver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/meh/Scenes/GameOver.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Help.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/meh/Scenes/Help.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Leaderboard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/meh/Scenes/Leaderboard.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Obstacle.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/State.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/NextLevel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/meh/Scenes/NextLevel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Scene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/meh/Scenes/Scene.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,6 +54,7 @@
     "ASKED_MARK_IGNORED_FILES_AS_EXCLUDED": "true",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "main",
     "last_opened_file_path": "/home/unvariant/code/csa-project"
   }

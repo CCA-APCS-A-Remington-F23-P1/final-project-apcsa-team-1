@@ -1,3 +1,6 @@
+package meh.Scenes;
+
+import meh.*;
 import javax.imageio.ImageIO;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
@@ -16,7 +19,7 @@ public class GameIntroScene extends Box {
     private final int count = 0;
 
     public GameIntroScene() {
-        System.out.println("Game Intro scene is created...");
+        System.out.println("meh.Scenes.Game Intro scene is created...");
         try {
             backgroundImage = ImageIO.read(new File("images/forest-background.png"));
             playBackground();

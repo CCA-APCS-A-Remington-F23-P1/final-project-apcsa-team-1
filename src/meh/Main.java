@@ -1,3 +1,6 @@
+package meh;
+
+import meh.Scenes.*;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -10,7 +13,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.stream.Stream;
-
 import static javax.swing.JLayeredPane.POPUP_LAYER;
 
 public class Main {
@@ -125,7 +127,7 @@ public class Main {
         window.add(layer);
 
         set(new GameIntroScene());
-        // push(new Leaderboard());
+        // push(new meh.Scenes.Leaderboard());
 
         // don't allow the user to resize the window
         window.setResizable(false);

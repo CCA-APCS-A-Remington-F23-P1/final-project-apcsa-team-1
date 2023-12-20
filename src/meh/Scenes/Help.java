@@ -1,3 +1,6 @@
+package meh.Scenes;
+
+import meh.*;
 import java.awt.*;
 
 public class Help extends Scene {

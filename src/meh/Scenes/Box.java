@@ -1,3 +1,5 @@
+package meh.Scenes;
+
 import java.awt.*;
 
 public class Box extends Scene {

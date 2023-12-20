@@ -1,3 +1,6 @@
+package meh.Scenes;
+
+import meh.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -41,7 +44,7 @@ public class Game extends Scene {
         reset(true);
 
         var key = KeyStroke.getKeyStroke(VK_SLASH, SHIFT_DOWN_MASK, false);
-        getInputMap(WHEN_IN_FOCUSED_WINDOW).put(key, key.hashCode());
+        getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(key, key.hashCode());
         getActionMap().put(key.hashCode(), new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {

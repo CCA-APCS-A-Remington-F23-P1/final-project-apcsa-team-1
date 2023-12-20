@@ -1,3 +1,6 @@
+package meh.Scenes;
+
+import meh.*;
 import javax.swing.*;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;

@@ -1,3 +1,5 @@
+package meh;
+
 public class Score {
     public long timeTaken;
     public int highestRound;
