@@ -48,13 +48,14 @@ public class Help extends Scene {
           frame.setColor(Color.RED);
         }
         else if (percent >= 50) {
-          frame.setColor(Color.ORANGE);
+          frame.setColor(Color.MAGENTA);
         }
         else if (percent >= 25) {
-          frame.setColor(Color.YELLOW);
+          frame.setColor(Color.ORANGE);
         }
         else if (percent >= 0) {
           frame.setColor(Color.GREEN);
         }
+        return percent;
     }
 }
