@@ -6,6 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -23,10 +24,14 @@ public class Main {
     public static final int MAIN_WIDTH = WIDTH;
     public static final int FRAMERATE = 15;
     public static final int DEFAULT_GAME_SECONDS = 10;
-    private static final ArrayList<Scene> popups = new ArrayList<>();
     public static JFrame window;
     public static Path IMAGE_DIR = Paths.get("images");
     public static Font BUTTON_FONT = new Font("MONOSPACE", Font.PLAIN, 64);
+    public static int screenMinX;
+    public static int screenMaxX;
+    public static int screenMinY;
+    public static int screenMaxY;
+    private static final ArrayList<Scene> popups = new ArrayList<>();
     private static Scene currentScene;
     private static JLayeredPane layer;
 
@@ -109,6 +114,29 @@ public class Main {
     }
 
     private static void init() {
+        {
+            var dyn = new JFrame("meh");
+            dyn.setPreferredSize(new Dimension(10, 10));
+            dyn.setResizable(false);
+            // fit the window size around the components (just our jpanel).
+            // pack() should be called after setResizable() to avoid issues on some platforms
+            dyn.pack();
+            // open window in the center of the screen
+            dyn.setLocation(0, 0);
+            dyn.setVisible(true);
+
+            var ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+            var defaultScreen = ge.getDefaultScreenDevice();
+            var rect = defaultScreen.getDefaultConfiguration().getBounds();
+
+            screenMinX = dyn.getLocationOnScreen().x;
+            screenMinY = dyn.getLocationOnScreen().y;
+            screenMaxX = (int) rect.getMaxX();
+            screenMaxY = (int) rect.getMaxY();
+
+            dyn.dispatchEvent(new WindowEvent(dyn, WindowEvent.WINDOW_CLOSING));
+        }
+
         window = new JFrame("Testing, testing...");
         // when we close the window, stop the app
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -135,8 +163,7 @@ public class Main {
         // pack() should be called after setResizable() to avoid issues on some platforms
         window.pack();
         // open window in the center of the screen
-        // window.setLocationRelativeTo(0, 0);
-        window.setLocation(0, 0);
+        window.setLocationRelativeTo(null);
         // display the window
         window.setVisible(true);
 

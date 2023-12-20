@@ -13,6 +13,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.stream.IntStream;
+import java.util.stream.Collectors;
 
 import static java.awt.event.KeyEvent.SHIFT_DOWN_MASK;
 import static java.awt.event.KeyEvent.VK_SLASH;
@@ -29,6 +30,7 @@ public class Game extends Scene {
     private int finishLine;
     private long startTime = System.currentTimeMillis();
     private long elapsed;
+    private Point velocity;
 
     public Game() {
         levelSeconds = Main.DEFAULT_GAME_SECONDS;
@@ -63,6 +65,10 @@ public class Game extends Scene {
 
     public static int rand(int range) {
         return (int) (Math.random() * (double) range);
+    }
+
+    private Point randomVelocity() {
+        return new Point((int)(Math.random() * 20) - 10, (int)(Math.random() * 20) - 10);
     }
 
     @Override
@@ -152,6 +158,21 @@ public class Game extends Scene {
 
             prey.update();
             treasure.update();
+
+            {
+                var pos = Main.window.getLocationOnScreen();
+                System.out.println(pos);
+                var width = Main.window.getWidth();
+                var height = Main.window.getHeight();
+                var npos = new Point(pos.x + velocity.x, pos.y + velocity.y);
+                if (npos.x <= Main.screenMinX || npos.x + width >= Main.screenMaxX) {
+                    velocity.x *= -1;
+                }
+                if (npos.y <= Main.screenMinY || npos.y + height >= Main.screenMaxY) {
+                    velocity.y *= -1;
+                }
+                Main.window.setLocation(npos);
+            }
         }
     }
 
@@ -166,6 +187,7 @@ public class Game extends Scene {
 
         startTime = System.currentTimeMillis();
         elapsed = 0;
+        velocity = randomVelocity();
 
         if (animals.isEmpty()) {
             for (var type : Animal.Type.values()) {
@@ -191,7 +213,7 @@ public class Game extends Scene {
 
         animals.forEach(animal -> animal.setVisible(true));
 
-        var preyList = Arrays.stream(Animal.Type.values()).filter(Animal.Type::isPrey).toList();
+        var preyList = Arrays.stream(Animal.Type.values()).filter(Animal.Type::isPrey).collect(Collectors.toList());
         prey = new Prey(preyList.get((int) (Math.random() * preyList.size())));
         if (prey.height > Main.TRACK_HEIGHT) {
             prey.scale(200.0 / prey.height);

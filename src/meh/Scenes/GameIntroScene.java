@@ -22,7 +22,7 @@ public class GameIntroScene extends Box {
         System.out.println("meh.Scenes.Game Intro scene is created...");
         try {
             backgroundImage = ImageIO.read(new File("images/forest-background.png"));
-            playBackground();
+            // playBackground();
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -77,7 +77,7 @@ public class GameIntroScene extends Box {
             }
     }
 
-/* looping audio is kind of annoying */
+    /* looping audio is kind of annoying */
 //    private void playBackground() throws IOException, UnsupportedAudioFileException, LineUnavailableException {
 //        File musicPath = new File("arcade-bgm.wav");
 //        if (musicPath.exists()) {
