@@ -77,6 +77,7 @@ public class GameIntroScene extends Box {
             }
     }
 
+/* looping audio is kind of annoying */
 //    private void playBackground() throws IOException, UnsupportedAudioFileException, LineUnavailableException {
 //        File musicPath = new File("arcade-bgm.wav");
 //        if (musicPath.exists()) {
