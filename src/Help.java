@@ -1,14 +1,15 @@
 import java.awt.*;
-import java.awt.event.ActionEvent;
 
 public class Help extends Scene {
     private static final String BUTTON_ACTION = "i was pressed";
     private Animal prey;
+    private boolean gameRunning = false;
 
     public Help() {
         super();
 
         if (Main.current() instanceof Game) {
+            gameRunning = true;
             prey = ((Game) Main.current()).prey;
         }
     }
@@ -17,7 +18,7 @@ public class Help extends Scene {
     public void paintComponent(Graphics frame) {
         super.paintComponent(frame);
 
-        frame.drawString("Rules: ", 50, 50);
+        frame.drawString("Rules (Press the ? on your keyboard to access this in game): ", 50, 50);
         frame.drawString("You have to stop the prey before it reaches the treasure. In order to do this you need to select the appropriate predator in time.", 50, 80);
         frame.drawString("List of predators and their corresponding prey:", 50, 110);
         frame.drawString("Eagle: Duck, Parrot, Toucan", 50, 140);
@@ -28,20 +29,17 @@ public class Help extends Scene {
         frame.drawString("Snake: Mouse, Rat, Squirrel", 50, 290);
         frame.drawString("Lion: Horse, Donkey, Zebra", 50, 320);
         frame.drawString("T-Rex: Triceratops, Pterodactyl, Brachiosaurus", 50, 350);
-
-        if (prey != null) {
+        if (gameRunning) {
+            String str = "You are " + percent() + "% through the round.";
+            frame.drawString(str, 50, 400);
             frame.drawImage(prey.images[prey.animationFrame], 50, 500, prey.width, prey.height, null);
         }
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        var action = e.getActionCommand();
-        if (action != null) switch (action) {
-            case BUTTON_ACTION: {
-                System.out.println("I was pressed");
-                break;
-            }
-        }
+    public int percent() {
+        var game = (Game) Main.current();
+        double totalTime = (double) game.getLevelMillis();
+        double currentTime = (double) game.getElapsed();
+        return (int) ((currentTime / totalTime) * 100.0);
     }
 }
