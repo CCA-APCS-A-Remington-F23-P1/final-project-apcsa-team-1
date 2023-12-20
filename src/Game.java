@@ -92,7 +92,7 @@ public class Game extends Scene {
         return prey;
     }
 
-    public long getlevelMillis() {
+    public long getLevelMillis() {
       return levelMillis;
     }
 
