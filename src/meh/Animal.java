@@ -8,13 +8,6 @@ import java.util.List;
 
 public class Animal extends Actor {
     public final Type type;
-    public long hoveredTime = 0;
-    public boolean pressed;
-    private long timer;
-    private int oldWidth;
-    private int oldHeight;
-    private boolean isDraggable = true;
-    private boolean isHoverable = true;
 
     public Animal(Type type) {
         super();
@@ -23,84 +16,6 @@ public class Animal extends Actor {
         frames(Paths.get("actors").resolve(type.name().toLowerCase()));
         scale(type.customScaling);
         flip(type.flip);
-
-        var mouse = new MouseAdapter() {
-            @Override
-            public void mousePressed(MouseEvent e) {
-                pressed = true;
-                timer = System.currentTimeMillis();
-            }
-
-            @Override
-            public void mouseReleased(MouseEvent e) {
-                pressed = false;
-            }
-
-            @Override
-            public void mouseMoved(MouseEvent e) {
-                hoveredTime = System.currentTimeMillis();
-            }
-
-            @Override
-            public void mouseEntered(MouseEvent e) {
-                if (isActive() && isHoverable) {
-                    oldWidth = width;
-                    oldHeight = height;
-                    scale(1.3);
-                }
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
-                if (isActive() && isHoverable) {
-                    size(oldWidth, oldHeight);
-                }
-            }
-        };
-        addMouseListener(mouse);
-        addMouseMotionListener(mouse);
-    }
-
-    public Actor draggable(boolean state) {
-        this.isDraggable = state;
-        return this;
-    }
-
-    public Actor hoverable(boolean state) {
-        this.isHoverable = state;
-        return this;
-    }
-
-    @Override
-    public Actor pos(int ix, int iy) {
-        var TOP = Main.HEIGHT;
-        ix = Math.max(ix, 0);
-        iy = Math.max(iy, 0);
-        if (ix + width > Main.WIDTH) ix = Main.WIDTH - width;
-        if (iy + height > TOP) iy = TOP - height;
-        return super.pos(ix, iy);
-    }
-
-    @Override
-    public void update() {
-        super.update();
-
-        if (isActive()) {
-            if (pressed && isDraggable) {
-                Point screen = MouseInfo.getPointerInfo().getLocation();
-                Point target = new Point(screen.x - Main.window.getLocationOnScreen().x, screen.y - Main.window.getLocationOnScreen().y);
-
-                long now = System.currentTimeMillis();
-                double elapsed = (double) (now - timer) / 1000;
-                timer = now;
-
-                double lerp = 6.0 * elapsed;
-                var distance = new Point(target.x - (x + width / 2), target.y - (y + height / 2));
-                var velocity = new Point((int) (distance.x * lerp), (int) (distance.y * lerp));
-
-                pos(x + velocity.x, y + velocity.y);
-            }
-        }
     }
 
     public enum Type {

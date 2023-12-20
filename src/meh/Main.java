@@ -135,10 +135,10 @@ public class Main {
         // pack() should be called after setResizable() to avoid issues on some platforms
         window.pack();
         // open window in the center of the screen
-        window.setLocationRelativeTo(null);
+        // window.setLocationRelativeTo(0, 0);
+        window.setLocation(0, 0);
         // display the window
         window.setVisible(true);
-        window.createBufferStrategy(2);
 
         Timer timer = new Timer(1000 / FRAMERATE, new ActionListener() {
             @Override

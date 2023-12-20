@@ -20,7 +20,7 @@ import static java.awt.event.KeyEvent.VK_SLASH;
 public class Game extends Scene {
     private final static BufferedImage BACKGROUND = Main.loadImage(Paths.get("images", "forest-background.png"));
     private final Actor treasure = new Actor().frames(Paths.get("treasurechest.png"));
-    private final ArrayList<Animal> animals = new ArrayList<>();
+    private final ArrayList<Predator> animals = new ArrayList<>();
     private long levelMillis;
     private final double levelSeconds;
     public Animal prey;
@@ -41,7 +41,7 @@ public class Game extends Scene {
         setLayout(null);
         setBounds(0, 0, Main.WIDTH, Main.HEIGHT);
 
-        reset(true);
+        reset(true, false);
 
         var key = KeyStroke.getKeyStroke(VK_SLASH, SHIFT_DOWN_MASK, false);
         getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(key, key.hashCode());
@@ -102,13 +102,14 @@ public class Game extends Scene {
     public void nextRound() {
         round += 1;
 
-        boolean speedUp = Math.random() >= 0.5;
-        boolean shuffle = Math.random() >= 0.7;
+        boolean speedUp = Math.random() >= 0.4;
+        boolean shuffle = Math.random() >= 0.6;
+        boolean crazy = Math.random() >= 0.7;
         if (speedUp) {
             levelMillis = Math.max(1500, levelMillis - 500);
         }
 
-        reset(shuffle);
+        reset(shuffle, crazy);
     }
 
     public void update() {
@@ -154,7 +155,7 @@ public class Game extends Scene {
         }
     }
 
-    public void reset(boolean shuffle) {
+    public void reset(boolean shuffle, boolean crazy) {
         activate();
 
         for (var component : getComponents()) {
@@ -170,7 +171,7 @@ public class Game extends Scene {
             for (var type : Animal.Type.values()) {
                 if (type.isPrey()) continue;
 
-                var animal = new Animal(type);
+                var animal = new Predator(type);
                 animal.animationRate(400);
                 animal.setVisible(false);
                 animals.add(animal);
@@ -182,18 +183,16 @@ public class Game extends Scene {
             if (animal.height > 150) {
                 animal.scale(150.0 / animal.height);
             }
+            if (shuffle) {
+                animal.pos(rand(Main.MAIN_WIDTH), rand(Main.MAIN_HEIGHT - animal.height));
+            }
+            animal.crazy(crazy);
         });
-
-        if (shuffle) {
-            animals.forEach(animal -> animal.pos(rand(Main.MAIN_WIDTH), rand(Main.MAIN_HEIGHT - animal.height)));
-        }
 
         animals.forEach(animal -> animal.setVisible(true));
 
         var preyList = Arrays.stream(Animal.Type.values()).filter(Animal.Type::isPrey).toList();
-        prey = new Animal(preyList.get((int) (Math.random() * preyList.size())));
-        prey.draggable(false);
-        prey.hoverable(false);
+        prey = new Prey(preyList.get((int) (Math.random() * preyList.size())));
         if (prey.height > Main.TRACK_HEIGHT) {
             prey.scale(200.0 / prey.height);
         }

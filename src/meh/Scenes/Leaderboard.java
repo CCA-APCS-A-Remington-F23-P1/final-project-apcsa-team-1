@@ -25,6 +25,7 @@ public class Leaderboard extends Box {
         {
             var gbc = new GridBagConstraints();
             gbc.gridwidth = GridBagConstraints.REMAINDER;
+            gbc.insets = new Insets(32, 0, 0, 0);
             add(label, gbc);
         }
 
