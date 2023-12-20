@@ -33,16 +33,28 @@ public class Help extends Scene {
         frame.drawString("Lion: Horse, Donkey, Zebra", 50, 320);
         frame.drawString("T-Rex: Triceratops, Pterodactyl, Brachiosaurus", 50, 350);
         if (gameRunning) {
-            String str = "You are " + percent() + "% through the round.";
+            String str = "You are " + percent(frame) + "% through the round.";
             frame.drawString(str, 50, 400);
             frame.drawImage(prey.images[prey.animationFrame], 50, 500, prey.width, prey.height, null);
         }
     }
 
-    public int percent() {
+    public static int percent(Graphics frame) {
         var game = (Game) Main.current();
         double totalTime = (double) game.getLevelMillis();
         double currentTime = (double) game.getElapsed();
-        return (int) ((currentTime / totalTime) * 100.0);
+        int percent = (int) ((currentTime / totalTime) * 100.0);
+        if (percent >= 75) {
+          frame.setColor(Color.RED);
+        }
+        else if (percent >= 50) {
+          frame.setColor(Color.ORANGE);
+        }
+        else if (percent >= 25) {
+          frame.setColor(Color.YELLOW);
+        }
+        else if (percent >= 0) {
+          frame.setColor(Color.GREEN);
+        }
     }
 }
