@@ -56,5 +56,6 @@ public class Help extends Scene {
         else if (percent >= 0) {
           frame.setColor(Color.GREEN);
         }
+        return percent;
     }
 }
